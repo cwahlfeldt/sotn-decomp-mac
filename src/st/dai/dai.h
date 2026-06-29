@@ -6,6 +6,19 @@
 #define OVL_EXPORT(x) DAI_##x
 #define STAGE_IS_DAI
 
+#if defined(VERSION_PC)
+// These per-stage graphics/palettes share symbol names across stages. The PC
+// build links every stage into one binary, so prefix dai's copies to avoid
+// duplicate-symbol collisions (the gen bank/palette tables that reference them
+// include this header, so the references rename consistently).
+#define gfx_stage_name_en DAI_gfx_stage_name_en
+#define gfx_stage_name_jp_lg DAI_gfx_stage_name_jp_lg
+#define gfx_portrait_alucard DAI_gfx_portrait_alucard
+#define pal_portrait_alucard DAI_pal_portrait_alucard
+#define gfx_portrait_maria DAI_gfx_portrait_maria
+#define pal_portrait_maria DAI_pal_portrait_maria
+#endif
+
 // Used for cluts and in g_EInits
 enum OVL_EXPORT(Palette) {
     PAL_NONE = 0,

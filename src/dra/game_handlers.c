@@ -1627,10 +1627,14 @@ void HandleNowLoading(void) {
             if (LOADFILESIM_PSPALT(0, SimFileType_StagePrg) < 0) {
                 break;
             }
+#if !defined(VERSION_PC)
+            // PC does not simulate SEQ (music) file loads yet; a stage with a
+            // sequence file (e.g. DAI) would otherwise hang here in NowLoading.
             if (g_StagesLba[g_StageId].seqIdx >= 0 &&
                 LoadFileSim(g_StagesLba[g_StageId].seqIdx, 4) < 0) {
                 break;
             }
+#endif
         }
         g_GameStep++;
         break;

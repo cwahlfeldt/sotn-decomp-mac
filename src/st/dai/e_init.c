@@ -152,6 +152,9 @@ PfnEntityUpdate OVL_EXPORT(EntityUpdates)[] = {
 // clang-format off
 // animSet, animCurFrame, unk5A, palette, enemyID
 EInit OVL_EXPORT(EInitBreakable) = {ANIMSET_DRA(3), 0, 0, PAL_NULL, 0x000};
+// On PC the shared g_EInit* commons are provided once (by st0); defining them
+// here too would be a duplicate symbol. They're identical across stages.
+#if !defined(VERSION_PC)
 EInit g_EInitObtainable = {ANIMSET_DRA(3), 0, 0, PAL_NULL, 0x001};
 EInit g_EInitParticle = {ANIMSET_DRA(3), 0, 0, PAL_NULL, 0x002};
 EInit g_EInitSpawner = {ANIMSET_DRA(0), 0, 0, PAL_NULL, 0x004};
@@ -160,6 +163,7 @@ EInit g_EInitUnkId13 = {ANIMSET_DRA(0), 0, 0, PAL_NULL, 0x002};
 EInit g_EInitLockCamera = {ANIMSET_DRA(0), 0, 0, PAL_NULL, 0x001};
 EInit g_EInitCommon = {ANIMSET_DRA(0), 0, 0, PAL_NULL, 0x003};
 EInit g_EInitDamageNum = {ANIMSET_DRA(0), 0, 0, PAL_NULL, 0x003};
+#endif
 EInit g_EInitUnused801809A4 = {ANIMSET_OVL(1), 43, 72, PAL_SKELERANG, 0x003};
 EInit g_EInitEnvironment = {ANIMSET_OVL(1), 0, 0, PAL_NULL, 0x005};
 EInit g_EInitConfessionalGhost = {ANIMSET_OVL(2), 0, 72, PAL_CONFESSIONAL_GHOST, 0x005};

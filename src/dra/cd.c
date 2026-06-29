@@ -655,6 +655,12 @@ void UpdateCd(void) {
             g_LbaStagePrg.loc = g_StagesLba[g_StageId].ovlOff;
             g_LbaStagePrg.size = g_StagesLba[g_StageId].ovlLen;
             seqIdx = g_StagesLba[g_StageId].seqIdx;
+#if defined(VERSION_PC)
+            // The PC CD simulation does not load SEQ (music) files yet, so a
+            // stage with a sequence file (e.g. DAI) would chain to a load that
+            // never completes and hang forever in NowLoading. Skip the chain.
+            seqIdx = -1;
+#endif
             if (seqIdx >= 0) { // A stage has an optional sequence file
                 g_LbaStagePrg.nextCdFileType = CdFile_Seq;
                 g_LbaStageSeq.loc = *(&D_800ACCF8[seqIdx].loc);

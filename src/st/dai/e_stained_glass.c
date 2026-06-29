@@ -180,6 +180,9 @@ Primitive* StainedGlassRecurseDepth(
 
 // Renders the stained glass and "sunlight" effect
 void EntityStainedGlass(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s16 midpointX, midpointY;
     s32 primIndex;
     SVECTOR rotVector;
