@@ -9,11 +9,15 @@ if (WIN32)
     set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 endif()
 
+option(SOTN_ASAN "Build with AddressSanitizer (dev only; aborts on PSX-valid \
+data layouts like GfxBank terminators, so turn OFF to actually play)" ON)
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang|AppleClang")
     set(CMAKE_BUILD_TYPE Debug)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
-    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
+    if (SOTN_ASAN)
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
+        set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
+    endif()
 
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-incompatible-pointer-types")
@@ -342,6 +346,82 @@ set(SOURCE_FILES_STAGE_CEN
     src/st/cen/prim_helpers.c
 )
 
+set(SOURCE_FILES_STAGE_CHI
+    src/pc/stages/stage_chi.c
+    src/st/chi/dt_header.c
+    src/st/chi/gen/e_laydef.c
+    src/st/chi/gen/e_layout.c
+    src/st/chi/gen/rooms.c
+    src/st/chi/gen/sprites.c
+    src/st/chi/e_init.c
+    src/st/chi/stage_data.c
+    src/st/chi/dt_prize_drops.c
+    src/st/chi/background_block_init.c
+    src/st/chi/e_room_bg.c
+    src/st/chi/e_lock_camera.c
+    src/st/chi/e_red_door_tiles.c
+    src/st/chi/e_gremlin.c
+    src/st/chi/e_salem_witch.c
+    src/st/chi/en_breakable_wall.c
+    src/st/chi/en_breakable.c
+    src/st/chi/en_collect.c
+    src/st/chi/en_debug_cerberus_gate.c
+    src/st/chi/en_demon_switch_wall.c
+    src/st/chi/en_falling_stairs.c
+    src/st/chi/en_misc.c
+    src/st/chi/en_particles.c
+    src/st/chi/en_popup.c
+    src/st/chi/en_red_door.c
+    src/st/chi/en_room_foreground.c
+    src/st/chi/en_stage_name.c
+    src/st/chi/en_thornweed_corpseweed.c
+    src/st/chi/en_venus_weed.c
+    src/st/chi/st_collision.c
+    src/st/chi/st_update.c
+    src/st/chi/ut_common.c
+    src/st/chi/ut_create_entity.c
+    src/st/chi/ut_prim_helpers.c
+)
+
+# DRE (Nightmare). PC uses generated banks (header.c #includes gen/*), so the
+# PSX pointer-array files (gfx_banks/sprite_banks/palette_def/layers) are
+# omitted; the actual pixel/tile data (gfx_data, tilemaps) is kept.
+set(SOURCE_FILES_STAGE_DRE
+    src/pc/stages/stage_dre.c
+    src/st/dre/header.c
+    src/st/dre/gen/e_laydef.c
+    src/st/dre/gen/e_layout.c
+    src/st/dre/gen/rooms.c
+    src/st/dre/gen/us/sprites.c
+    src/st/dre/gfx_data.c
+    src/st/dre/tilemaps.c
+    src/st/dre/e_init.c
+    src/st/dre/background_block_init.c
+    src/st/dre/collision.c
+    src/st/dre/create_entity.c
+    src/st/dre/d_prize_drops.c
+    src/st/dre/e_background_clouds.c
+    src/st/dre/e_background_house.c
+    src/st/dre/e_breakable.c
+    src/st/dre/e_collect.c
+    src/st/dre/e_cutscene_actors.c
+    src/st/dre/e_cutscene_dialogue.c
+    src/st/dre/e_lock_camera.c
+    src/st/dre/e_misc.c
+    src/st/dre/e_particles.c
+    src/st/dre/e_red_door_tiles.c
+    src/st/dre/e_red_door.c
+    src/st/dre/e_room_bg.c
+    src/st/dre/e_room_fg.c
+    src/st/dre/e_stage_name.c
+    src/st/dre/e_succubus.c
+    src/st/dre/cutscene_data.c
+    src/st/dre/popup.c
+    src/st/dre/prim_helpers.c
+    src/st/dre/st_common.c
+    src/st/dre/st_update.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -552,6 +632,8 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_3RD}
     ${SOURCE_FILES_STAGE_SEL}
     ${SOURCE_FILES_STAGE_CEN}
+    ${SOURCE_FILES_STAGE_CHI}
+    ${SOURCE_FILES_STAGE_DRE}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

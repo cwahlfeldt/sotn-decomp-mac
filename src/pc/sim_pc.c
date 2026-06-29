@@ -214,6 +214,8 @@ void LoadStageTileset(u8* pTilesetData, size_t len, s32 y) {
 
 void InitStageDummy(Overlay* o);
 void InitStageCEN(Overlay* o);
+void InitStageCHI(Overlay* o);
+void InitStageDRE(Overlay* o);
 void InitStageNZ0(Overlay* o);
 void InitStageST0(Overlay* o);
 void InitStageWRP(Overlay* o);
@@ -452,6 +454,12 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
             break;
         case STAGE_CEN:
             InitStageCEN(&g_api.o);
+            break;
+        case STAGE_CHI:
+            InitStageCHI(&g_api.o);
+            break;
+        case STAGE_DRE:
+            InitStageDRE(&g_api.o);
             break;
         case STAGE_NZ0:
             InitStageNZ0(&g_api.o);

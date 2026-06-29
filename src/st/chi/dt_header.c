@@ -11,7 +11,11 @@ extern RoomHeader OVL_EXPORT(rooms)[];
 extern s16** OVL_EXPORT(spriteBanks)[];
 extern u_long* OVL_EXPORT(cluts)[];
 extern RoomDef OVL_EXPORT(rooms_layers)[];
+#if defined(VERSION_PC)
+extern u_long** OVL_EXPORT(gfxBanks)[];
+#else
 extern GfxBank* OVL_EXPORT(gfxBanks)[];
+#endif
 
 // D_80180000
 Overlay OVL_EXPORT(Overlay) = {
@@ -52,7 +56,7 @@ static u16** PaletteCommand0[] = {
 };
 
 // D_801800E4
-static u_long* OVL_EXPORT(cluts)[] = {
+u_long* OVL_EXPORT(cluts)[] = {
     PaletteCommand0,
 };
 
@@ -75,6 +79,7 @@ extern u8 bn_gfx_venus_weed_2[];
 extern u8 bn_gfx_stage_name_en[];
 
 // D_80180298
+#if !defined(VERSION_PC)
 static GfxBank GfxBank_Null = {
     .kind = GFX_BANK_NONE,
     .entries =
@@ -143,7 +148,7 @@ static u_long GfxBank_AllWeeds_TERM = GFX_TERMINATE();
 
 // clang-format off
 // D_80180364
-static GfxBank* OVL_EXPORT(gfxBanks)[] = {
+GfxBank* OVL_EXPORT(gfxBanks)[] = {
     &GfxBank_Null,
     &GfxBank_StageName,
     &GfxBank_Gremlin1,
@@ -165,4 +170,9 @@ static GfxBank* OVL_EXPORT(gfxBanks)[] = {
     &GfxBank_Null,
     &GfxBank_Null,
 };
+#else
+// PC uses the uncompressed graphics banks (real bn_gfx_* arrays) instead of the
+// PSX compressed GfxBank format, which the native port can't decompress.
+#include "gen/graphics_banks.h"
+#endif
 // clang-format on

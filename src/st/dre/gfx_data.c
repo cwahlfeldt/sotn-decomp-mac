@@ -41,6 +41,8 @@ u8 gfx_succubus_lisa[] = {
 #include "gen/gfx_succubus_lisa.h"
 };
 
+// PC: the cutscene portraits are shared and provided once by SEL (st/sel/F9A8).
+#if !defined(VERSION_PC)
 u8 gfx_portrait_alucard[] = {
 #include "gen/gfx_portrait_alucard.h"
 };
@@ -52,6 +54,7 @@ u8 gfx_portrait_lisa[] = {
 u8 gfx_portrait_succubus[] = {
 #include "gen/gfx_portrait_succubus.h"
 };
+#endif
 
 #ifdef VERSION_US
 u8 gfx_stage_name_en[] = {

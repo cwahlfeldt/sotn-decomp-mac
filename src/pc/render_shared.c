@@ -3,6 +3,12 @@
 #include <log.h>
 #include <game.h>
 #include <stdlib.h>
+#ifdef _MSC_VER
+#define SDL_MAIN_HANDLED
+#include <SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif
 #include "pc.h"
 #include <assert.h>
 #include <string.h>
@@ -22,13 +28,46 @@ void GlSetDrawEnv(DR_ENV* dr_env, DRAWENV* env);
 DRAWENV* GlPutDrawEnv(DRAWENV* env);
 void GlDrawOTag(OT_TYPE* p);
 
-int MyDrawSync(int mode) {
-    if (render_mode == RENDER_SOFT) {
-        return SoftDrawSync(mode);
-    } else {
-        return GlDrawSync(mode);
+// SOTN's simulation advances exactly one frame per displayed frame, so on a
+// high-refresh monitor (e.g. 120 Hz) the whole game runs too fast (2x at
+// 120 Hz). Cap the frame cadence to the game's native NTSC 60 Hz here, the one
+// place every frame passes through. Vsync stays on for tear-free output; this
+// just holds each frame until the next 1/60 s boundary.
+#define SOTN_FPS 60
+static void LimitFrameRate(void) {
+    static Uint64 nextFrame = 0;
+    const Uint64 freq = SDL_GetPerformanceFrequency();
+    const Uint64 period = freq / SOTN_FPS;
+    Uint64 now = SDL_GetPerformanceCounter();
+
+    // First frame, or recover from a long stall (loading, breakpoint) without
+    // trying to "catch up" a burst of frames.
+    if (nextFrame == 0 || now > nextFrame + period * 4) {
+        nextFrame = now;
     }
-    return 0;
+    nextFrame += period;
+
+    if (now < nextFrame) {
+        Uint64 remaining = nextFrame - now;
+        Uint32 ms = (Uint32)(remaining * 1000 / freq);
+        if (ms > 1) {
+            SDL_Delay(ms - 1); // sleep the bulk, keep ~1 ms to spin
+        }
+        while (SDL_GetPerformanceCounter() < nextFrame) {
+            // spin for sub-millisecond accuracy
+        }
+    }
+}
+
+int MyDrawSync(int mode) {
+    int ret;
+    if (render_mode == RENDER_SOFT) {
+        ret = SoftDrawSync(mode);
+    } else {
+        ret = GlDrawSync(mode);
+    }
+    LimitFrameRate();
+    return ret;
 }
 
 DISPENV* MyPutDispEnv(DISPENV* env) {

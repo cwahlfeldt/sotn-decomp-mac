@@ -135,7 +135,7 @@ static ControllerButtonConfig controller_set[] = {
     {SDL_CONTROLLER_BUTTON_LEFTSTICK, PAD_L3},
     {SDL_CONTROLLER_BUTTON_RIGHTSTICK, PAD_R3},
     {SDL_CONTROLLER_BUTTON_LEFTSHOULDER, PAD_L1},
-    {SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, PAD_L2},
+    {SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, PAD_R1},
     {SDL_CONTROLLER_BUTTON_DPAD_UP, PAD_UP},
     {SDL_CONTROLLER_BUTTON_DPAD_DOWN, PAD_DOWN},
     {SDL_CONTROLLER_BUTTON_DPAD_LEFT, PAD_LEFT},
@@ -156,7 +156,7 @@ void MyPadInit(int mode) {
 u_long MyPadRead(int id) {
     u_long pressed = 0;
     if (controllers[id]) {
-        SDL_GameController* controller = &controllers[id];
+        SDL_GameController* controller = controllers[id];
         SDL_GameControllerUpdate();
         for (int i = 0; i < LEN(controller_set); i++) {
             if (SDL_GameControllerGetButton(

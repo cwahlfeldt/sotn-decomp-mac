@@ -37,3 +37,6 @@ objdiff*.json
 
 # rust
 target/**
+pc/*
+!pc/.gitkeep
+dist/*

@@ -73,6 +73,9 @@ static s16 D_us_80180CF4[] = {
 // clang-format on
 
 static Primitive* DrawFacade(Primitive* prim, u8* indices, u16* arg2) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 p0;
     s32 p1;
     s32 p2;
@@ -136,6 +139,9 @@ static Primitive* DrawFacade(Primitive* prim, u8* indices, u16* arg2) {
 }
 
 static Primitive* DrawSides(Primitive* prim, u8* indices, u16* arg2) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 p0;
     s32 p1;
     s32 p2;
@@ -202,6 +208,9 @@ static Primitive* DrawSides(Primitive* prim, u8* indices, u16* arg2) {
 }
 
 static Primitive* DrawRoof(Primitive* prim, u8* indices, u16* arg2) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 p0;
     s32 p1;
     s32 p2;
@@ -266,6 +275,9 @@ void Entity3DHouseSpawner(Entity* self) {
 }
 
 void Entity3DBackgroundHouse(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     long p, flag;
     SVECTOR rot;
     VECTOR trans;
