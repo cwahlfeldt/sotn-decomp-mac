@@ -5,6 +5,19 @@
 
 #define OVL_EXPORT(x) NO3_##x
 
+#if defined(VERSION_PC)
+// Enemy gfx/palettes and inits that no3 duplicates under shared symbol names
+// (shared with nz0/dai). The PC build links every stage into one binary, so
+// prefix no3's copies to avoid duplicate-symbol collisions.
+#define e_explosion_g NO3_e_explosion_g
+#define e_explosion_p NO3_e_explosion_p
+#define e_slinger_g NO3_e_slinger_g
+#define e_slinger_p NO3_e_slinger_p
+#define g_EInitBat NO3_g_EInitBat
+#define g_EInitBoneScimitar NO3_g_EInitBoneScimitar
+#define g_EInitScimitarParts NO3_g_EInitScimitarParts
+#endif
+
 void EntityExplosionVariants(Entity* entity);
 void EntityGreyPuff(Entity* entity);
 

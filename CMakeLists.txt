@@ -529,6 +529,65 @@ set(SOURCE_FILES_STAGE_NO2
     src/st/no2/hammer.c
 )
 
+set(SOURCE_FILES_STAGE_NO3
+    src/pc/stages/stage_no3.c
+    src/st/no3/header.c
+    src/st/no3/gen/e_laydef.c
+    src/st/no3/gen/e_layout.c
+    src/st/no3/gen/rooms.c
+    src/st/no3/gen/sprites.c
+    src/st/no3/stage_data.c
+    src/st/no3/tilemaps.c
+    src/st/no3/e_init.c
+    src/st/no3/st_common.c
+    src/st/no3/st_update.c
+    src/st/no3/collision.c
+    src/st/no3/create_entity.c
+    src/st/no3/prim_helpers.c
+    src/st/no3/popup.c
+    src/st/no3/background_block_init.c
+    src/st/no3/d_prize_drops.c
+    src/st/no3/cutscene_data.c
+    src/st/no3/cutscene.c
+    src/st/no3/d_water_data.c
+    src/st/no3/water_effects.c
+    src/st/no3/entrance_weights.c
+    src/st/no3/e_background_bushes_trees.c
+    src/st/no3/e_background_lightning.c
+    src/st/no3/e_bat.c
+    src/st/no3/e_bone_scimitar.c
+    src/st/no3/e_breakable.c
+    src/st/no3/e_castle_door.c
+    src/st/no3/e_cavern_door.c
+    src/st/no3/e_collect.c
+    src/st/no3/e_death_sky_swirl.c
+    src/st/no3/e_death.c
+    src/st/no3/e_explosion_puff_opaque.c
+    src/st/no3/e_fire_warg.c
+    src/st/no3/e_heartroom.c
+    src/st/no3/e_jewel_sword_puzzle.c
+    src/st/no3/e_lock_camera.c
+    src/st/no3/e_merman.c
+    src/st/no3/e_merman2.c
+    src/st/no3/e_misc.c
+    src/st/no3/e_outdoor_ents.c
+    src/st/no3/e_particles.c
+    src/st/no3/e_red_door_tiles.c
+    src/st/no3/e_red_door.c
+    src/st/no3/e_room_bg.c
+    src/st/no3/e_room_fg.c
+    src/st/no3/e_shutting_window.c
+    src/st/no3/e_sky_entities.c
+    src/st/no3/e_stage_name.c
+    src/st/no3/e_stairway.c
+    src/st/no3/e_tilemap_shuffler.c
+    src/st/no3/e_transparent_water.c
+    src/st/no3/e_trapdoor.c
+    src/st/no3/e_unkId16.c
+    src/st/no3/e_warg.c
+    src/st/no3/e_zombie.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -743,6 +802,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_DRE}
     ${SOURCE_FILES_STAGE_DAI}
     ${SOURCE_FILES_STAGE_NO2}
+    ${SOURCE_FILES_STAGE_NO3}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

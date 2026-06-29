@@ -116,6 +116,9 @@ static Primitive* SkySwirlHelper(
 
 // sky animation during death cutscene
 void EntityDeathSkySwirl(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     Primitive* prim;
     Primitive* prim2;
     s32 primIndex;

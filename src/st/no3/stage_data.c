@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include <stage.h>
+// For the PC single-binary build, no3.h renames the shared-name explosion/
+// slinger gfx symbols defined below so they don't collide with other stages.
+#include "no3.h"
 
 u8 stage_title_no3_jp[] = {
 #include "gen/stage_title_no3_jp.h"

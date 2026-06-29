@@ -2,7 +2,13 @@
 extern Dialogue g_Dialogue;
 extern s32 g_SkipCutscene;
 
-void CutsceneSkip(Entity* self) {
+// Static everywhere except pspeu so the PC build (which links all stages into
+// one binary) doesn't get duplicate definitions from each cutscene stage.
+#ifndef VERSION_PSP
+static
+#endif
+    void
+    CutsceneSkip(Entity* self) {
     if (g_pads[0].tapped == PAD_START) {
         g_SkipCutscene = true;
         g_api.FreePrimitives(self->primIndex);

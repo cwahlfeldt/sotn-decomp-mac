@@ -612,6 +612,9 @@ static u16 g_EntityCastleBridgePriorities[] = {
     192, 191, 192, 191, 192, 191, 192, 191, 192, 191, 192, 191};
 
 void EntityCastleBridge(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     const u32 primCount = 24;
 
     MATRIX* matrix;
