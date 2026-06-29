@@ -46,6 +46,9 @@ static cloudData data[] = {
 static SVECTOR empty = {0};
 
 void EntityClouds(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     Primitive* prim;
     Primitive* primTwo;
     MedusaCloudsUVal* uVals;

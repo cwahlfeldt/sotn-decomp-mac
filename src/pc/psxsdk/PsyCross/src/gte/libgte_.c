@@ -896,3 +896,9 @@ int SquareRoot0(int a) {
 
     return SQRT[idx - 64] << (31 - lzcs >> 1) >> 12;
 }
+
+// PC implementations of the translation-register loads (PSX uses ctc2 macros).
+// Used by shared 3D-background code (e_clouds.h, e_clock_tower.h).
+void gte_ldtx(s16 v) { C2_TRX = v; }
+void gte_ldty(s16 v) { C2_TRY = v; }
+void gte_ldtz(s16 v) { C2_TRZ = v; }
