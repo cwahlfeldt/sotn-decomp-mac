@@ -2,8 +2,13 @@
 // The CUTSCENE_UNK1_NEXT_X, CUTSCENE_UNK1_UNK17, and NUM_CUTSCENE_PRIM macros
 // must be set in ovl.h
 
-// pspeu needs this to not be static
-void CutsceneUnk1(void) {
+// pspeu needs this to not be static; everywhere else it is, so the PC build
+// (which links all stages together) doesn't get duplicate definitions.
+#ifndef VERSION_PSP
+static
+#endif
+    void
+    CutsceneUnk1(void) {
     g_Dialogue.nextLineY = g_Dialogue.startY + 20;
     g_Dialogue.nextCharX = g_Dialogue.nextLineX = CUTSCENE_UNK1_NEXT_X;
     g_Dialogue.nextCharY = 0;
