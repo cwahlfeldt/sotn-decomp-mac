@@ -20,6 +20,9 @@ STATIC_PAD_DATA(8);
 #include "../step_towards.h"
 
 void EntitySpectralSword(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 primIndex;
     s32 sp48;
     s32 sp44;

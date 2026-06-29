@@ -6,6 +6,19 @@
 
 #define OVL_EXPORT(x) NO2_##x
 
+#if defined(VERSION_PC)
+// These enemy entities/inits are duplicated per stage under shared symbol
+// names (no2 shares them with dai). The PC build links every stage into one
+// binary, so prefix no2's copies to avoid duplicate-symbol collisions. Each
+// definition and its references include this header, so they rename together.
+#define EntitySpectralSword NO2_EntitySpectralSword
+#define g_EInitSpectralSword NO2_g_EInitSpectralSword
+#define g_EInitSkelerang NO2_g_EInitSkelerang
+#define g_EInitSkelerangBoomerang NO2_g_EInitSkelerangBoomerang
+#define g_EInitBloodyZombie NO2_g_EInitBloodyZombie
+#define g_EInitEnvironment NO2_g_EInitEnvironment
+#endif
+
 enum OVL_EXPORT(Palette) {
     PAL_NONE = 0,
     PAL_SPIKES_DUST = 0x161,
