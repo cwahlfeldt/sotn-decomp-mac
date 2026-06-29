@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include <stage.h>
+// For the PC single-binary build, np3.h renames the shared-name enemy gfx
+// symbols defined below so they don't collide with other stages.
+#include "np3.h"
 
 u8 stage_title_np3_jp[] = {
 #include "gen/stage_title_np3_jp.h"

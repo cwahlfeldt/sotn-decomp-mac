@@ -8,7 +8,10 @@ extern LayoutEntity* OVL_EXPORT(pStObjLayoutHorizontal)[];
 extern RoomDef OVL_EXPORT(rooms_layers)[];
 extern u_long** OVL_EXPORT(gfxBanks)[];
 
-static AbbreviatedOverlay OVL_EXPORT(Overlay) = {
+#if !defined(VERSION_PC)
+static
+#endif
+    AbbreviatedOverlay OVL_EXPORT(Overlay) = {
     .Update = Update,
     .HitDetection = HitDetection,
     .UpdateRoomPosition = UpdateRoomPosition,

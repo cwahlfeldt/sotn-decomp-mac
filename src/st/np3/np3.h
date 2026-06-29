@@ -4,6 +4,56 @@
 #define OVL_EXPORT(x) NP3_##x
 #define STAGE_IS_NP3
 
+#if defined(VERSION_PC)
+// np3 shares many enemy gfx/palettes and inits with no3 (both Castle
+// Entrance variants). The PC build links every stage into one binary, so
+// prefix np3's copies with NP3_ to avoid duplicate-symbol collisions.
+#define e_bloody_zombie_g NP3_e_bloody_zombie_g
+#define e_bloody_zombie_p NP3_e_bloody_zombie_p
+#define e_explosion_g NP3_e_explosion_g
+#define e_explosion_p NP3_e_explosion_p
+#define e_gaibon_g0 NP3_e_gaibon_g0
+#define e_gaibon_g1 NP3_e_gaibon_g1
+#define e_gaibon_p NP3_e_gaibon_p
+#define e_ghost_bat_g NP3_e_ghost_bat_g
+#define e_ghost_bat_p NP3_e_ghost_bat_p
+#define e_merman_g0 NP3_e_merman_g0
+#define e_merman_g1 NP3_e_merman_g1
+#define e_merman_g2 NP3_e_merman_g2
+#define e_merman_g3 NP3_e_merman_g3
+#define e_merman_p NP3_e_merman_p
+#define e_skyswirl_g0 NP3_e_skyswirl_g0
+#define e_skyswirl_g1 NP3_e_skyswirl_g1
+#define e_skyswirl_p NP3_e_skyswirl_p
+#define e_slinger_g NP3_e_slinger_g
+#define e_slinger_p NP3_e_slinger_p
+#define e_slogra_g0 NP3_e_slogra_g0
+#define e_slogra_g1 NP3_e_slogra_g1
+#define e_slogra_g2 NP3_e_slogra_g2
+#define e_slogra_p NP3_e_slogra_p
+#define e_zombie_g NP3_e_zombie_g
+#define e_zombie_p NP3_e_zombie_p
+#define g_EInitBat NP3_g_EInitBat
+#define g_EInitBlade NP3_g_EInitBlade
+#define g_EInitBladeWeapon NP3_g_EInitBladeWeapon
+#define g_EInitBloodyZombie NP3_g_EInitBloodyZombie
+#define g_EInitBoneScimitar NP3_g_EInitBoneScimitar
+#define g_EInitGurkha NP3_g_EInitGurkha
+#define g_EInitGurkhaWeapon NP3_g_EInitGurkhaWeapon
+#define g_EInitHammer NP3_g_EInitHammer
+#define g_EInitHammerWeapon NP3_g_EInitHammerWeapon
+#define g_EInitMerman NP3_g_EInitMerman
+#define g_EInitMermanFireball NP3_g_EInitMermanFireball
+#define g_EInitOwl NP3_g_EInitOwl
+#define g_EInitOwlKnight NP3_g_EInitOwlKnight
+#define g_EInitOwlKnightSword NP3_g_EInitOwlKnightSword
+#define g_EInitScimitarParts NP3_g_EInitScimitarParts
+#define g_EInitStInteractable NP3_g_EInitStInteractable
+#define g_EInitWaterObject NP3_g_EInitWaterObject
+#define g_EInitWaterSplash NP3_g_EInitWaterSplash
+#define g_EInitZombie NP3_g_EInitZombie
+#endif
+
 enum Palettes {
     PAL_NONE = 0,
     // puff params 0,1,3

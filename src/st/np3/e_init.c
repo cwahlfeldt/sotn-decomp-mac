@@ -189,6 +189,9 @@ PfnEntityUpdate OVL_EXPORT(EntityUpdates)[] = {
 
 EInit OVL_EXPORT(
     EInitBreakable) = {ANIMSET_DRA(0x03), 0x00, 0x00, 0x000, 0x000};
+// On PC the shared g_EInit* commons are provided once (by st0); defining them
+// here too would be a duplicate symbol. They're identical across stages.
+#if !defined(VERSION_PC)
 EInit g_EInitObtainable = {ANIMSET_DRA(0x03), 0x00, 0x00, 0x000, 0x001};
 EInit g_EInitParticle = {ANIMSET_DRA(0x03), 0x00, 0x00, 0x000, 0x002};
 EInit g_EInitSpawner = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x000, 0x004};
@@ -197,6 +200,7 @@ EInit g_EInitUnkId13 = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x000, 0x002};
 EInit g_EInitLockCamera = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x000, 0x001};
 EInit g_EInitCommon = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x000, 0x003};
 EInit g_EInitDamageNum = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x000, 0x003};
+#endif
 EInit g_EInitStInteractable = {ANIMSET_OVL(0x01), 0x00, 0x00, 0x000, 0x005};
 EInit g_EInitWaterObject = {ANIMSET_OVL(0x03), 0x01, 0x48, 0x28C, 0x01D};
 EInit g_EInitWaterSplash = {ANIMSET_OVL(0x03), 0x00, 0x48, 0x28C, 0x01E};
