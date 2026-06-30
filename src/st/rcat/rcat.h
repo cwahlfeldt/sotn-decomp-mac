@@ -5,6 +5,26 @@
 #include <stage.h>
 
 #define OVL_EXPORT(x) RCAT_##x
+
+#if defined(VERSION_PC)
+// Prefix the symbols rcat shares with other stages so they don't collide
+// in the single PC binary.
+#define EntityBreakableWallDebris RCAT_EntityBreakableWallDebris
+#define EntityBreakableWallParticles RCAT_EntityBreakableWallParticles
+#define EntityBreakableWallSegment RCAT_EntityBreakableWallSegment
+#define EntityLava RCAT_EntityLava
+#define EntitySecretWall RCAT_EntitySecretWall
+#define g_EInitBat RCAT_g_EInitBat
+#define g_EInitBloodSkeleton RCAT_g_EInitBloodSkeleton
+#define g_EInitEnvironment RCAT_g_EInitEnvironment
+#define g_EInitSkeleton RCAT_g_EInitSkeleton
+#define g_EInitSkeletonBone RCAT_g_EInitSkeletonBone
+#define g_EInitSkeletonPieces RCAT_g_EInitSkeletonPieces
+#define gfx_blood_skeleton RCAT_gfx_blood_skeleton
+#define gfx_breakable RCAT_gfx_breakable
+#define pal_blood_skeleton RCAT_pal_blood_skeleton
+#define pal_breakable RCAT_pal_breakable
+#endif
 #define STAGE_IS_RCAT
 #define INVERTED_STAGE
 

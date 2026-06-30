@@ -131,3 +131,35 @@ u8 gfx_skeleton[] = {
 // u16 pal_skeleton[] = {
 // #include "gen/pal_skeleton.h"
 // };
+
+#if defined(VERSION_PC)
+// CLUT/palette arrays: splat raw data in the matching build; the PC
+// build's generated palette_def table needs them as C symbols.
+u16 pal_frozen_half[] = {
+#include "gen/pal_frozen_half.h"
+};
+u16 pal_salome[] = {
+#include "gen/pal_salome.h"
+};
+u16 pal_21A[] = {
+#include "gen/pal_21A.h"
+};
+u16 pal_22A[] = {
+#include "gen/pal_22A.h"
+};
+u16 pal_235[] = {
+#include "gen/pal_235.h"
+};
+u16 pal_breakable[] = {
+#include "gen/pal_breakable.h"
+};
+u16 pal_bat[] = {
+#include "gen/pal_bat.h"
+};
+u16 pal_blood_skeleton[] = {
+#include "gen/pal_blood_skeleton.h"
+};
+u16 pal_skeleton[] = {
+#include "gen/pal_skeleton.h"
+};
+#endif

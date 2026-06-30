@@ -825,6 +825,48 @@ set(SOURCE_FILES_STAGE_ARE
     src/st/are/tilemaps.c
 )
 
+set(SOURCE_FILES_STAGE_RCAT
+    src/pc/stages/stage_rcat.c
+    src/st/rcat/gen/e_laydef.c
+    src/st/rcat/gen/e_layout.c
+    src/st/rcat/gen/rooms.c
+    src/st/rcat/gen/us/sprites.c
+    src/st/rcat/background_block_init.c
+    src/st/rcat/collision.c
+    src/st/rcat/create_entity.c
+    src/st/rcat/d_prize_drops.c
+    src/st/rcat/e_bat.c
+    src/st/rcat/e_blood_skeleton.c
+    src/st/rcat/e_breakable.c
+    src/st/rcat/e_cavern_background.c
+    src/st/rcat/e_collect.c
+    src/st/rcat/e_frozen_half.c
+    src/st/rcat/e_init.c
+    src/st/rcat/e_lava.c
+    src/st/rcat/e_lock_camera.c
+    src/st/rcat/e_misc.c
+    src/st/rcat/e_particles.c
+    src/st/rcat/e_red_door.c
+    src/st/rcat/e_red_door_tiles.c
+    src/st/rcat/e_room_bg.c
+    src/st/rcat/e_room_fg.c
+    src/st/rcat/e_salome.c
+    src/st/rcat/e_secrets.c
+    src/st/rcat/e_skeleton.c
+    src/st/rcat/e_spikes.c
+    src/st/rcat/e_stage_name.c
+    src/st/rcat/gfx_data.c
+    src/st/rcat/header.c
+    src/st/rcat/popup.c
+    src/st/rcat/prim_helpers.c
+    src/st/rcat/st_common.c
+    src/st/rcat/st_update.c
+    src/st/rcat/tilemaps.c
+    src/st/rcat/unk_31F1C.c
+    src/st/rcat/unk_32118.c
+    src/st/rcat/unk_323D8.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -1045,6 +1087,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_RNZ0}
     ${SOURCE_FILES_STAGE_CAT}
     ${SOURCE_FILES_STAGE_ARE}
+    ${SOURCE_FILES_STAGE_RCAT}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

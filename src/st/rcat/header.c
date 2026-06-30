@@ -4,10 +4,18 @@
 
 // common
 extern RoomHeader OVL_EXPORT(rooms)[];
+#if defined(VERSION_PC)
+extern s16** OVL_EXPORT(spriteBanks)[];
+#else
 extern SpriteParts* OVL_EXPORT(spriteBanks)[];
+#endif
 extern u_long* OVL_EXPORT(cluts)[];
 extern RoomDef OVL_EXPORT(rooms_layers)[];
+#if defined(VERSION_PC)
+extern u_long** OVL_EXPORT(gfxBanks)[];
+#else
 extern GfxBank* OVL_EXPORT(gfxBanks)[];
+#endif
 void UpdateStageEntities(void);
 
 AbbreviatedOverlay OVL_EXPORT(Overlay) = {
@@ -23,3 +31,11 @@ AbbreviatedOverlay OVL_EXPORT(Overlay) = {
     .gfxBanks = OVL_EXPORT(gfxBanks),
     .UpdateStageEntities = UpdateStageEntities,
 };
+
+#if defined(VERSION_PC)
+#include "gen/us/sprite_banks.h"
+#include "gen/palette_def.h"
+#include "gen/layers.h"
+#include "gen/us/graphics_banks.h"
+#endif
+

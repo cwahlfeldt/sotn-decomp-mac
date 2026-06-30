@@ -27,6 +27,9 @@ typedef struct {
 } unkStruct;
 
 void func_us_801BACF4(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 temp_t1;
     s32 var_a2_2;
     s32 x0, y0;
