@@ -9,6 +9,26 @@
 
 #define OVL_EXPORT(x) CAT_##x
 
+#if defined(VERSION_PC)
+// cat shares these enemy entities/inits/gfx with other stages; prefix
+// cat's copies with CAT_ on PC to avoid duplicate-symbol collisions.
+#define EntityBreakableWallDebris CAT_EntityBreakableWallDebris
+#define EntityElevator CAT_EntityElevator
+#define g_EInitBloodSkeleton CAT_g_EInitBloodSkeleton
+#define g_EInitCorpseweed CAT_g_EInitCorpseweed
+#define g_EInitCorpseweedProjectile CAT_g_EInitCorpseweedProjectile
+#define g_EInitElevator CAT_g_EInitElevator
+#define g_EInitEnvironment CAT_g_EInitEnvironment
+#define g_EInitGremlin CAT_g_EInitGremlin
+#define g_EInitGremlinFire CAT_g_EInitGremlinFire
+#define g_EInitThornweed CAT_g_EInitThornweed
+#define gfx_breakable CAT_gfx_breakable
+#define gfx_stage_name_en CAT_gfx_stage_name_en
+#define gfx_stage_name_jp_lg CAT_gfx_stage_name_jp_lg
+#define pal_2E0 CAT_pal_2E0
+#define pal_breakable CAT_pal_breakable
+#endif
+
 #include "../pfn_entity_update.h"
 
 enum OVL_EXPORT(Palette) {

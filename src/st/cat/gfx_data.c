@@ -173,3 +173,53 @@ u8 gfx_slime[] = {
 // u16 pal_2E0[] = {
 // #include "gen/pal_2E0.h"
 // };
+
+#if defined(VERSION_PC)
+// CLUT/palette arrays: supplied as splat raw data in the matching build, but
+// the PC build's generated palette_def table needs them as C symbols.
+u16 pal_bone_ark[] = {
+#include "gen/pal_bone_ark.h"
+};
+u16 pal_slime[] = {
+#include "gen/pal_slime.h"
+};
+u16 pal_208[] = {
+#include "gen/pal_208.h"
+};
+u16 pal_214[] = {
+#include "gen/pal_214.h"
+};
+u16 pal_lossoth[] = {
+#include "gen/pal_lossoth.h"
+};
+u16 pal_discus_lord[] = {
+#include "gen/pal_discus_lord.h"
+};
+u16 pal_231[] = {
+#include "gen/pal_231.h"
+};
+u16 pal_grave_keeper_tombstone[] = {
+#include "gen/pal_grave_keeper_tombstone.h"
+};
+u16 pal_gremlin[] = {
+#include "gen/pal_gremlin.h"
+};
+u16 pal_246[] = {
+#include "gen/pal_246.h"
+};
+u16 pal_wereskeleton[] = {
+#include "gen/pal_wereskeleton.h"
+};
+u16 pal_thornweed_corpseweed[] = {
+#include "gen/pal_thornweed_corpseweed.h"
+};
+u16 pal_breakable[] = {
+#include "gen/pal_breakable.h"
+};
+u16 pal_blood_skeleton[] = {
+#include "gen/pal_blood_skeleton.h"
+};
+u16 pal_2E0[] = {
+#include "gen/pal_2E0.h"
+};
+#endif

@@ -716,6 +716,61 @@ set(SOURCE_FILES_STAGE_RNZ0
     src/st/rnz0/e_stage_name.c
 )
 
+set(SOURCE_FILES_STAGE_CAT
+    src/pc/stages/stage_cat.c
+    src/st/cat/gen/e_laydef.c
+    src/st/cat/gen/e_layout.c
+    src/st/cat/gen/rooms.c
+    src/st/cat/gen/us/sprites.c
+    src/st/cat/background_block_init.c
+    src/st/cat/create_entity.c
+    src/st/cat/d_prize_drops.c
+    src/st/cat/e_blood_skeleton.c
+    src/st/cat/e_bone_ark.c
+    src/st/cat/e_breakable.c
+    src/st/cat/e_cavern_background.c
+    src/st/cat/e_coffin.c
+    src/st/cat/e_collect.c
+    src/st/cat/e_discus_lord.c
+    src/st/cat/e_elevator.c
+    src/st/cat/e_grave_keeper.c
+    src/st/cat/e_gremlin.c
+    src/st/cat/e_hellfire_beast.c
+    src/st/cat/e_init.c
+    src/st/cat/e_lava.c
+    src/st/cat/e_lava_glow.c
+    src/st/cat/e_lock_camera.c
+    src/st/cat/e_lossoth.c
+    src/st/cat/e_misc.c
+    src/st/cat/e_particles.c
+    src/st/cat/e_red_door.c
+    src/st/cat/e_red_door_tiles.c
+    src/st/cat/e_room_bg.c
+    src/st/cat/e_room_fg.c
+    src/st/cat/e_secrets.c
+    src/st/cat/e_slime.c
+    src/st/cat/e_spike_room_light_switch.c
+    src/st/cat/e_spikes.c
+    src/st/cat/e_stage_name.c
+    src/st/cat/e_tombstone.c
+    src/st/cat/e_wereskeleton.c
+    src/st/cat/en_thornweed_corpseweed.c
+    src/st/cat/gfx_data.c
+    src/st/cat/giantbro_helpers.c
+    src/st/cat/header.c
+    src/st/cat/popup.c
+    src/st/cat/prim_helpers.c
+    src/st/cat/st_collision.c
+    src/st/cat/st_common.c
+    src/st/cat/st_update.c
+    src/st/cat/tilemaps.c
+    src/st/cat/unk_3872C.c
+    src/st/cat/unk_38AD0.c
+    src/st/cat/unk_3A164.c
+    src/st/cat/unk_3ACF4.c
+    src/st/cat/unk_3B4CC.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -934,6 +989,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_NP3}
     ${SOURCE_FILES_STAGE_RWRP}
     ${SOURCE_FILES_STAGE_RNZ0}
+    ${SOURCE_FILES_STAGE_CAT}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}
