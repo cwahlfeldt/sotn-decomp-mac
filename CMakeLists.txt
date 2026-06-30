@@ -771,6 +771,60 @@ set(SOURCE_FILES_STAGE_CAT
     src/st/cat/unk_3B4CC.c
 )
 
+set(SOURCE_FILES_STAGE_ARE
+    src/pc/stages/stage_are.c
+    src/st/are/gen/e_laydef.c
+    src/st/are/gen/e_layout.c
+    src/st/are/gen/rooms.c
+    src/st/are/gen/us/sprites.c
+    src/st/are/background_block_init.c
+    src/st/are/create_entity.c
+    src/st/are/d_prize_drops.c
+    src/st/are/e_armor_lord.c
+    src/st/are/e_background_door_rubble.c
+    src/st/are/e_blade_master.c
+    src/st/are/e_blade_soldier.c
+    src/st/are/e_blue_axe_knight.c
+    src/st/are/e_bone_musket.c
+    src/st/are/e_bone_scimitar.c
+    src/st/are/e_boss_doors.c
+    src/st/are/e_boss_torch.c
+    src/st/are/e_breakable.c
+    src/st/are/e_cavern_door.c
+    src/st/are/e_collect.c
+    src/st/are/e_elevator.c
+    src/st/are/e_explosion_puff_opaque.c
+    src/st/are/e_flea_armor.c
+    src/st/are/e_flea_man.c
+    src/st/are/e_fountain_water.c
+    src/st/are/e_grave_keeper.c
+    src/st/are/e_hunting_girl.c
+    src/st/are/e_init.c
+    src/st/are/e_lock_camera.c
+    src/st/are/e_misc.c
+    src/st/are/e_mist_door.c
+    src/st/are/e_owl_knight.c
+    src/st/are/e_paranthropus.c
+    src/st/are/e_particles.c
+    src/st/are/e_plate_lord.c
+    src/st/are/e_plate_lord_2.c
+    src/st/are/e_red_door.c
+    src/st/are/e_red_door_tiles.c
+    src/st/are/e_room_bg.c
+    src/st/are/e_room_fg.c
+    src/st/are/e_secrets.c
+    src/st/are/e_stage_name.c
+    src/st/are/e_valhalla_knight.c
+    src/st/are/gfx_data.c
+    src/st/are/header.c
+    src/st/are/popup.c
+    src/st/are/prim_helpers.c
+    src/st/are/st_collision.c
+    src/st/are/st_common.c
+    src/st/are/st_update.c
+    src/st/are/tilemaps.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -990,6 +1044,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_RWRP}
     ${SOURCE_FILES_STAGE_RNZ0}
     ${SOURCE_FILES_STAGE_CAT}
+    ${SOURCE_FILES_STAGE_ARE}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

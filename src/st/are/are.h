@@ -5,6 +5,38 @@
 #include <stage.h>
 
 #define OVL_EXPORT(x) ARE_##x
+
+#if defined(VERSION_PC)
+// Prefix the symbols are shares with other stages so they don't collide
+// in the single PC binary.
+#define DoorCascadePhysics ARE_DoorCascadePhysics
+#define EntityAxeKnightThrowingAxe ARE_EntityAxeKnightThrowingAxe
+#define EntityCavernDoor ARE_EntityCavernDoor
+#define EntityElevator ARE_EntityElevator
+#define g_EInitAxeKnight ARE_g_EInitAxeKnight
+#define g_EInitAxeKnightAxe ARE_g_EInitAxeKnightAxe
+#define g_EInitBoneScimitar ARE_g_EInitBoneScimitar
+#define g_EInitEnvironment ARE_g_EInitEnvironment
+#define g_EInitGraveKeeper ARE_g_EInitGraveKeeper
+#define g_EInitGraveKeeperHitbox ARE_g_EInitGraveKeeperHitbox
+#define g_EInitHuntingGirl ARE_g_EInitHuntingGirl
+#define g_EInitOwl ARE_g_EInitOwl
+#define g_EInitOwlKnight ARE_g_EInitOwlKnight
+#define g_EInitOwlKnightSword ARE_g_EInitOwlKnightSword
+#define g_EInitScimitarParts ARE_g_EInitScimitarParts
+#define g_EInitValhallaKnight ARE_g_EInitValhallaKnight
+#define g_EInitValhallaKnightUnk1 ARE_g_EInitValhallaKnightUnk1
+#define g_EInitValhallaKnightUnk2 ARE_g_EInitValhallaKnightUnk2
+#define g_EInitValhallaKnightUnk3 ARE_g_EInitValhallaKnightUnk3
+#define gfx_grave_keeper ARE_gfx_grave_keeper
+#define gfx_grave_keeper_tombstone ARE_gfx_grave_keeper_tombstone
+#define gfx_hunting_girl ARE_gfx_hunting_girl
+#define gfx_stage_name_en ARE_gfx_stage_name_en
+#define gfx_stage_name_jp_lg ARE_gfx_stage_name_jp_lg
+#define gfx_stage_name_jp_sm ARE_gfx_stage_name_jp_sm
+#define pal_grave_keeper_tombstone ARE_pal_grave_keeper_tombstone
+#define pal_hunting_girl ARE_pal_hunting_girl
+#endif
 #define STAGE_IS_ARE
 
 enum Palettes {
