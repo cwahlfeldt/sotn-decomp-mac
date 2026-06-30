@@ -649,6 +649,29 @@ set(SOURCE_FILES_STAGE_NP3
     src/st/np3/e_zombie.c
 )
 
+set(SOURCE_FILES_STAGE_RWRP
+    src/pc/stages/stage_rwrp.c
+    src/st/rwrp/header.c
+    src/st/rwrp/gen/e_laydef.c
+    src/st/rwrp/gen/e_layout.c
+    src/st/rwrp/gen/rooms.c
+    src/st/rwrp/gen/sprites.c
+    src/st/rwrp/stage_data.c
+    src/st/rwrp/bss.c
+    src/st/rwrp/e_init.c
+    src/st/rwrp/background_block_init.c
+    src/st/rwrp/create_entity.c
+    src/st/rwrp/d_prize_drops.c
+    src/st/rwrp/e_breakable.c
+    src/st/rwrp/e_collect.c
+    src/st/rwrp/e_lock_camera.c
+    src/st/rwrp/e_misc.c
+    src/st/rwrp/e_red_door_tiles.c
+    src/st/rwrp/e_red_door.c
+    src/st/rwrp/e_room_bg.c
+    src/st/rwrp/warp.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -865,6 +888,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_NO2}
     ${SOURCE_FILES_STAGE_NO3}
     ${SOURCE_FILES_STAGE_NP3}
+    ${SOURCE_FILES_STAGE_RWRP}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

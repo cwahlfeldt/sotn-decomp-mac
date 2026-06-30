@@ -4,7 +4,13 @@
 #include "common.h"
 #include "sfx.h"
 
+#if defined(VERSION_PC)
+// On PSX this is a flat symbol mapped to the address of PLAYER.posY.i.hi; the
+// PC build has no such fixed-address symbol, so use the real member access.
+#define PLAYER_posY_i_hi PLAYER.posY.i.hi
+#else
 extern s16 PLAYER_posY_i_hi;
+#endif
 s16 GetDistanceToPlayerX();
 
 #define ImplicitGetDistanceToPlayerX ((int (*)())GetDistanceToPlayerX)

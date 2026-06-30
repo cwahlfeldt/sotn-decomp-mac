@@ -12,6 +12,21 @@
 
 s32 g_SimVabId = 0;
 
+// Reverse-castle stages name their stage sound files "SD_Z<name>" instead of
+// the usual "SD_ZK<name>". Probe which one exists so both naming schemes work.
+static const char* stage_sfx_prefix(void) {
+    char probe[256];
+    FILE* f;
+    snprintf(probe, sizeof(probe), "disks/us/ST/%s/SD_ZK%s.VH",
+             g_StagesLba[g_StageId].ovlName, g_StagesLba[g_StageId].ovlName);
+    f = fopen(probe, "rb");
+    if (f != NULL) {
+        fclose(f);
+        return "SD_ZK";
+    }
+    return "SD_Z";
+}
+
 SimFile D_800A024C[] = {
     {"sim:c:\\bin\\f_title1.bin", 13}, {"sim:c:\\bin\\f_game.bin", 1},
     {"sim:c:\\bin\\f_title0.bin", 2},  {"sim:c:\\bin\\face.bin", 6},
@@ -220,6 +235,7 @@ void InitStageDAI(Overlay* o);
 void InitStageNO2(Overlay* o);
 void InitStageNO3(Overlay* o);
 void InitStageNP3(Overlay* o);
+void InitStageRWRP(Overlay* o);
 void InitStageNZ0(Overlay* o);
 void InitStageST0(Overlay* o);
 void InitStageWRP(Overlay* o);
@@ -477,6 +493,9 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
         case STAGE_NP3:
             InitStageNP3(&g_api.o);
             break;
+        case STAGE_RWRP:
+            InitStageRWRP(&g_api.o);
+            break;
         case STAGE_NZ0:
             InitStageNZ0(&g_api.o);
             break;
@@ -505,8 +524,8 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
             return readToBuf(buf, sim.addr);
         } else {
             sim.path = smolbuf;
-            snprintf(smolbuf, sizeof(smolbuf), "ST/%s/SD_ZK%s.VH",
-                     g_StagesLba[g_StageId].ovlName,
+            snprintf(smolbuf, sizeof(smolbuf), "ST/%s/%s%s.VH",
+                     g_StagesLba[g_StageId].ovlName, stage_sfx_prefix(),
                      g_StagesLba[g_StageId].ovlName);
             sim.addr = aPbav_2;
             sim.path = smolbuf;
@@ -543,8 +562,8 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
             return readToBuf(buf, sim.addr);
         } else {
             sim.path = smolbuf;
-            snprintf(smolbuf, sizeof(smolbuf), "ST/%s/SD_ZK%s.VB",
-                     g_StagesLba[g_StageId].ovlName,
+            snprintf(smolbuf, sizeof(smolbuf), "ST/%s/%s%s.VB",
+                     g_StagesLba[g_StageId].ovlName, stage_sfx_prefix(),
                      g_StagesLba[g_StageId].ovlName);
             sim.path = sim.path;
             sim.size = g_StagesLba[g_StageId].vbLen;

@@ -7,7 +7,10 @@ extern u_long* OVL_EXPORT(cluts)[];
 extern RoomDef OVL_EXPORT(rooms_layers)[];
 extern u_long** OVL_EXPORT(gfxBanks)[];
 
-static Overlay OVL_EXPORT(Overlay) = {
+#if !defined(VERSION_PC)
+static
+#endif
+    Overlay OVL_EXPORT(Overlay) = {
     .Update = Update,
     .HitDetection = HitDetection,
     .UpdateRoomPosition = UpdateRoomPosition,

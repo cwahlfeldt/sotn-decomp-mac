@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include <stage.h>
+// For the PC single-binary build, rwrp.h renames the shared-name symbols
+// defined below so they don't collide with wrp.
+#include "rwrp.h"
 
 u8 stage_title_rwrp_jp[] = {
 #include "gen/stage_title_rwrp_jp.h"

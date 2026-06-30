@@ -7,6 +7,15 @@
 
 #define OVL_EXPORT(x) RWRP_##x
 
+#if defined(VERSION_PC)
+// rwrp shares warp-room entities/data with wrp under the same symbol names.
+// The PC build links every stage into one binary, so prefix rwrp's copies.
+#define D_80181D08 RWRP_D_80181D08
+#define EntityWarpSmallRocks RWRP_EntityWarpSmallRocks
+#define g_EInitSmallRocks RWRP_g_EInitSmallRocks
+#define g_EInitReverseSmallRocks RWRP_g_EInitReverseSmallRocks
+#endif
+
 typedef enum EntityIDs {
     E_NONE,
     E_BREAKABLE,
