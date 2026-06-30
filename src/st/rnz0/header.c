@@ -7,10 +7,17 @@ void UpdateRoomPosition(void);
 void InitRoomEntities(s32 objLayoutId);
 
 extern RoomHeader OVL_EXPORT(rooms)[];
+extern RoomDef OVL_EXPORT(rooms_layers)[];
+#if defined(VERSION_PC)
+// PC uses the generated uncompressed banks (see the #include block below).
+extern s16** OVL_EXPORT(spriteBanks)[];
+extern u_long* OVL_EXPORT(cluts)[];
+extern u_long** OVL_EXPORT(gfxBanks)[];
+#else
 extern SpriteParts* OVL_EXPORT(spriteBanks)[];
 extern u_long* OVL_EXPORT(cluts)[];
-extern RoomDef OVL_EXPORT(rooms_layers)[];
 extern GfxBank* OVL_EXPORT(gfxBanks)[];
+#endif
 
 Overlay OVL_EXPORT(Overlay) = {
     .Update = Update,
@@ -25,3 +32,10 @@ Overlay OVL_EXPORT(Overlay) = {
     .gfxBanks = OVL_EXPORT(gfxBanks),
     .UpdateStageEntities = UpdateStageEntities,
 };
+
+#if defined(VERSION_PC)
+#include "gen/us/sprite_banks.h"
+#include "gen/palette_def.h"
+#include "gen/layers.h"
+#include "gen/us/graphics_banks.h"
+#endif

@@ -8,6 +8,21 @@
 
 #define OVL_EXPORT(x) RNZ0_##x
 
+#if defined(VERSION_PC)
+// rnz0 shares enemy inits with nz0 (it's the reverse-castle Olrox's
+// Quarters). The PC build links every stage into one binary, so prefix
+// rnz0's copies with RNZ0_ to avoid duplicate-symbol collisions.
+#define g_EInitEnemy3 RNZ0_g_EInitEnemy3
+#define g_EInitGremlin RNZ0_g_EInitGremlin
+#define g_EInitGremlinFire RNZ0_g_EInitGremlinFire
+#define g_EInitLifeMaxTank RNZ0_g_EInitLifeMaxTank
+#define g_EInitPrizeContainer RNZ0_g_EInitPrizeContainer
+#define g_EInitSalemWitch RNZ0_g_EInitSalemWitch
+#define g_EInitSalemWitchCurse RNZ0_g_EInitSalemWitchCurse
+#define g_EInitSalemWitchTribolt RNZ0_g_EInitSalemWitchTribolt
+#define g_EInitTableWithGlobe RNZ0_g_EInitTableWithGlobe
+#endif
+
 enum Palettes {
     PAL_NONE,
     PAL_FIREDEMON_15E = 0x15E,

@@ -672,6 +672,50 @@ set(SOURCE_FILES_STAGE_RWRP
     src/st/rwrp/warp.c
 )
 
+set(SOURCE_FILES_STAGE_RNZ0
+    src/pc/stages/stage_rnz0.c
+    src/st/rnz0/header.c
+    src/st/rnz0/gen/e_laydef.c
+    src/st/rnz0/gen/e_layout.c
+    src/st/rnz0/gen/rooms.c
+    src/st/rnz0/gen/us/sprites.c
+    src/st/rnz0/stage_data.c
+    src/st/rnz0/e_init.c
+    src/st/rnz0/st_common.c
+    src/st/rnz0/st_update.c
+    src/st/rnz0/collision.c
+    src/st/rnz0/create_entity.c
+    src/st/rnz0/prim_helpers.c
+    src/st/rnz0/popup.c
+    src/st/rnz0/d_prize_drops.c
+    src/st/rnz0/e_bitterfly.c
+    src/st/rnz0/e_blue_flame_table.c
+    src/st/rnz0/e_breakable.c
+    src/st/rnz0/e_cannon.c
+    src/st/rnz0/e_collect.c
+    src/st/rnz0/e_ctulhu.c
+    src/st/rnz0/e_fire_demon.c
+    src/st/rnz0/e_floor_trap.c
+    src/st/rnz0/e_globe_table.c
+    src/st/rnz0/e_gremlin.c
+    src/st/rnz0/e_imp.c
+    src/st/rnz0/e_left_secret_room_wall.c
+    src/st/rnz0/e_lesser_demon.c
+    src/st/rnz0/e_life_max_tank.c
+    src/st/rnz0/e_lock_camera.c
+    src/st/rnz0/e_misc.c
+    src/st/rnz0/e_particles.c
+    src/st/rnz0/e_purple_brick.c
+    src/st/rnz0/e_red_door_tiles.c
+    src/st/rnz0/e_red_door.c
+    src/st/rnz0/e_red_eye_bust.c
+    src/st/rnz0/e_room_bg.c
+    src/st/rnz0/e_room_fg.c
+    src/st/rnz0/e_salem_witch.c
+    src/st/rnz0/e_sealed_door.c
+    src/st/rnz0/e_stage_name.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -889,6 +933,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_NO3}
     ${SOURCE_FILES_STAGE_NP3}
     ${SOURCE_FILES_STAGE_RWRP}
+    ${SOURCE_FILES_STAGE_RNZ0}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}
