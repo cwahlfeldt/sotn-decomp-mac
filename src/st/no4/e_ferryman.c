@@ -2,7 +2,14 @@
 #include "no4.h"
 
 // This is part of a different water effects data segment
+#ifdef VERSION_PC
+// On PC the whole water table is one array (d_water_data_pc.c); this PSX
+// label points at element 25 of it.
+extern s16 g_WaterXTbl[];
+#define D_us_80180F1A (g_WaterXTbl + 25)
+#else
 extern s16 D_us_80180F1A[];
+#endif
 
 #ifdef VERSION_PSP
 extern s32 E_ID(SURFACING_WATER);

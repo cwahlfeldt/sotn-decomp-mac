@@ -119,6 +119,9 @@ static void func_us_801D95EC(Entity* self) {
 }
 
 void EntityFrozenShade(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     u8 u0, u1;
     s16 var_s4;
     s16 var_s0_3;
@@ -840,6 +843,9 @@ void EntityFrozenShadeCrystal(struct Entity* self) {
 }
 
 void func_us_801DB1E8(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     Primitive* prim;
     u8* iptr;
     s16* ptr;

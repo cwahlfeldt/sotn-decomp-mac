@@ -867,6 +867,52 @@ set(SOURCE_FILES_STAGE_RCAT
     src/st/rcat/unk_323D8.c
 )
 
+set(SOURCE_FILES_STAGE_NO4
+    src/pc/stages/stage_no4.c
+    src/st/no4/gen/e_laydef.c
+    src/st/no4/gen/e_layout.c
+    src/st/no4/gen/rooms.c
+    src/st/no4/gen/sprites.c
+    src/st/no4/48248.c
+    src/st/no4/482B8.c
+    src/st/no4/background_block_init.c
+    src/st/no4/collision.c
+    src/st/no4/create_entity.c
+    src/st/no4/cutscene.c
+    src/st/no4/cutscene_data.c
+    src/st/no4/d_water_data_pc.c
+    src/st/no4/e_bat.c
+    src/st/no4/e_bone_archer.c
+    src/st/no4/e_breakable.c
+    src/st/no4/e_collect.c
+    src/st/no4/e_ferryman.c
+    src/st/no4/e_fishhead.c
+    src/st/no4/e_frog.c
+    src/st/no4/e_frozen_shade.c
+    src/st/no4/e_init.c
+    src/st/no4/e_killer_fish.c
+    src/st/no4/e_lock_camera.c
+    src/st/no4/e_misc.c
+    src/st/no4/e_particles.c
+    src/st/no4/e_red_door.c
+    src/st/no4/e_red_door_tiles.c
+    src/st/no4/e_room_bg.c
+    src/st/no4/e_room_fg.c
+    src/st/no4/e_secrets.c
+    src/st/no4/e_skeleton_ape.c
+    src/st/no4/e_spear_guard.c
+    src/st/no4/e_stage_name.c
+    src/st/no4/e_toad.c
+    src/st/no4/first_c_file.c
+    src/st/no4/header.c
+    src/st/no4/popup.c
+    src/st/no4/prim_helpers.c
+    src/st/no4/st_common.c
+    src/st/no4/st_update.c
+    src/st/no4/stage_data.c
+    src/st/no4/water_effects.c
+)
+
 set(SOURCE_FILES_STAGE_NZ0
     src/pc/stages/stage_nz0.c
     src/st/nz0/header.c
@@ -1088,6 +1134,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_CAT}
     ${SOURCE_FILES_STAGE_ARE}
     ${SOURCE_FILES_STAGE_RCAT}
+    ${SOURCE_FILES_STAGE_NO4}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

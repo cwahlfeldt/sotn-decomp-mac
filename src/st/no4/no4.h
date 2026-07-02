@@ -4,6 +4,15 @@
 #define STAGE_IS_NO4
 #define OVL_EXPORT(x) NO4_##x
 
+#if defined(VERSION_PC)
+// Prefix the symbols no4 shares with other stages so they don't collide
+// in the single PC binary.
+#define g_WaterSounds NO4_g_WaterSounds
+#define g_WaterXTbl NO4_g_WaterXTbl
+#define g_EInitBat NO4_g_EInitBat
+#define EntityBreakable NO4_EntityBreakable
+#endif
+
 typedef enum EntityIDs {
     /* 0x00 */ E_NONE,
     /* 0x01 */ E_BREAKABLE,
