@@ -867,6 +867,41 @@ set(SOURCE_FILES_STAGE_RCAT
     src/st/rcat/unk_323D8.c
 )
 
+set(SOURCE_FILES_STAGE_TOP
+    src/pc/stages/stage_top.c
+    src/st/top/gen/e_laydef.c
+    src/st/top/gen/e_layout.c
+    src/st/top/gen/rooms.c
+    src/st/top/296F4.c
+    src/st/top/collision.c
+    src/st/top/create_entity.c
+    src/st/top/cutscene.c
+    src/st/top/e_blue_axe_knight.c
+    src/st/top/e_breakable.c
+    src/st/top/e_clock_tower.c
+    src/st/top/e_collect.c
+    src/st/top/e_flea_rider.c
+    src/st/top/e_init.c
+    src/st/top/e_lock_camera.c
+    src/st/top/e_misc.c
+    src/st/top/e_particles.c
+    src/st/top/e_red_door_tiles.c
+    src/st/top/e_red_door.c
+    src/st/top/e_richter_fight_trigger.c
+    src/st/top/e_room_bg.c
+    src/st/top/e_room_fg.c
+    src/st/top/e_stage_name.c
+    src/st/top/header.c
+    src/st/top/pc_data.c
+    src/st/top/popup.c
+    src/st/top/post_richter_cutscene.c
+    src/st/top/prim_helpers.c
+    src/st/top/sprites_pc.c
+    src/st/top/st_common.c
+    src/st/top/st_update.c
+    src/st/top/tilemaps.c
+)
+
 set(SOURCE_FILES_STAGE_RARE
     src/pc/stages/stage_rare.c
     src/st/rare/gen/e_laydef.c
@@ -1330,6 +1365,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_LIB}
     ${SOURCE_FILES_STAGE_NO1}
     ${SOURCE_FILES_STAGE_RARE}
+    ${SOURCE_FILES_STAGE_TOP}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}
