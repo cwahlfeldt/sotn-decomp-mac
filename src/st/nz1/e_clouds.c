@@ -8,6 +8,9 @@ typedef s16 CloudData[5];
 
 // This EntityClouds is quite a bit different from the dai and rbo3 EntityClouds
 void EntityClouds(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     Primitive* prim;
     s32 i;
 

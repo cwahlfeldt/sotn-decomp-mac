@@ -119,6 +119,10 @@ static u8 D_us_801812B8[] = {
     8, 8, 8, 1, 1, 10, 7, 7, 7, 5, 11, 11, 11, 11, 11, 12, 10, 13, 13, 14,
 };
 
+#ifdef __unused
+// macOS <sys/cdefs.h> defines __unused as a macro
+#undef __unused
+#endif
 static u8 __unused[] UNUSED = {
     0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
     1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1,

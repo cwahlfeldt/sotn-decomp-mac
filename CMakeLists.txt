@@ -867,6 +867,98 @@ set(SOURCE_FILES_STAGE_RCAT
     src/st/rcat/unk_323D8.c
 )
 
+set(SOURCE_FILES_STAGE_NZ1
+    src/pc/stages/stage_nz1.c
+    src/st/nz1/gen/rooms.c
+    src/st/nz1/gen/sprites.c
+    src/st/nz1/background_block_init.c
+    src/st/nz1/collision.c
+    src/st/nz1/create_entity.c
+    src/st/nz1/d_prize_drops.c
+    src/st/nz1/d_water_data.c
+    src/st/nz1/e_bg_gears.c
+    src/st/nz1/e_boss_doors.c
+    src/st/nz1/e_breakable_bridge.c
+    src/st/nz1/e_breakable.c
+    src/st/nz1/e_cloaked_knight.c
+    src/st/nz1/e_clouds.c
+    src/st/nz1/e_collect.c
+    src/st/nz1/e_explosion_puff_opaque.c
+    src/st/nz1/e_flail_guard.c
+    src/st/nz1/e_flea_armor.c
+    src/st/nz1/e_flea_man.c
+    src/st/nz1/e_gear_horizontal.c
+    src/st/nz1/e_gear_large.c
+    src/st/nz1/e_gear_puzzle.c
+    src/st/nz1/e_gear_small.c
+    src/st/nz1/e_gear_vertical.c
+    src/st/nz1/e_harpy.c
+    src/st/nz1/e_init.c
+    src/st/nz1/e_karasuman.c
+    src/st/nz1/e_life_up.c
+    src/st/nz1/e_lock_camera.c
+    src/st/nz1/e_medusa_head.c
+    src/st/nz1/e_misc.c
+    src/st/nz1/e_particles.c
+    src/st/nz1/e_pendulum.c
+    src/st/nz1/e_phantom_skull.c
+    src/st/nz1/e_red_door_tiles.c
+    src/st/nz1/e_red_door.c
+    src/st/nz1/e_room_bg.c
+    src/st/nz1/e_room_exit.c
+    src/st/nz1/e_room_fg.c
+    src/st/nz1/e_secrets.c
+    src/st/nz1/e_skull_lord.c
+    src/st/nz1/e_spikes.c
+    src/st/nz1/e_stage_name.c
+    src/st/nz1/e_sword_lord.c
+    src/st/nz1/e_vandal_sword.c
+    src/st/nz1/e_water_fg.c
+    src/st/nz1/header.c
+    src/st/nz1/layout_pc.c
+    src/st/nz1/pc_data.c
+    src/st/nz1/popup.c
+    src/st/nz1/prim_helpers.c
+    src/st/nz1/st_common.c
+    src/st/nz1/st_update.c
+    src/st/nz1/tilemaps.c
+    src/st/nz1/water_effects.c
+)
+
+set(SOURCE_FILES_STAGE_RTOP
+    src/pc/stages/stage_rtop.c
+    src/st/rtop/gen/rooms.c
+    src/st/rtop/gen/sprites.c
+    src/st/rtop/20B48.c
+    src/st/rtop/collision.c
+    src/st/rtop/create_entity.c
+    src/st/rtop/e_breakable.c
+    src/st/rtop/e_clock_tower.c
+    src/st/rtop/e_collect.c
+    src/st/rtop/e_init.c
+    src/st/rtop/e_lock_camera.c
+    src/st/rtop/e_misc.c
+    src/st/rtop/e_particles.c
+    src/st/rtop/e_red_door_tiles.c
+    src/st/rtop/e_red_door.c
+    src/st/rtop/e_richter_fight_trigger.c
+    src/st/rtop/e_room_bg.c
+    src/st/rtop/e_room_fg.c
+    src/st/rtop/e_skull_lord.c
+    src/st/rtop/e_stage_name.c
+    src/st/rtop/e_tombstone.c
+    src/st/rtop/e_yorick.c
+    src/st/rtop/header.c
+    src/st/rtop/layout_pc.c
+    src/st/rtop/pc_data.c
+    src/st/rtop/popup.c
+    src/st/rtop/prim_helpers.c
+    src/st/rtop/st_common.c
+    src/st/rtop/st_update.c
+    src/st/rtop/tilemaps.c
+    src/st/rtop/rtop_data_pc.c
+)
+
 set(SOURCE_FILES_STAGE_TOP
     src/pc/stages/stage_top.c
     src/st/top/gen/e_laydef.c
@@ -900,6 +992,7 @@ set(SOURCE_FILES_STAGE_TOP
     src/st/top/st_common.c
     src/st/top/st_update.c
     src/st/top/tilemaps.c
+    src/st/top/top_data_pc.c
 )
 
 set(SOURCE_FILES_STAGE_RARE
@@ -933,6 +1026,7 @@ set(SOURCE_FILES_STAGE_RARE
     src/st/rare/e_white_dragon.c
     src/st/rare/header.c
     src/st/rare/pc_data.c
+    src/st/rare/rare_data_pc.c
     src/st/rare/popup.c
     src/st/rare/prim_helpers.c
     src/st/rare/st_common.c
@@ -1222,6 +1316,7 @@ set (SOURCE_FILES_STAGE_ST0
     src/st/st0/st_common.c
     src/st/st0/e_collect.c
     src/st/st0/e_misc.c
+    src/st/st0/e_room_bg.c
     src/st/st0/e_particles.c
     src/st/st0/e_room_fg.c
     src/st/st0/popup.c
@@ -1366,6 +1461,8 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_NO1}
     ${SOURCE_FILES_STAGE_RARE}
     ${SOURCE_FILES_STAGE_TOP}
+    ${SOURCE_FILES_STAGE_NZ1}
+    ${SOURCE_FILES_STAGE_RTOP}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

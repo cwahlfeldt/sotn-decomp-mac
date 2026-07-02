@@ -7,6 +7,40 @@
 #include <stage.h>
 
 #define OVL_EXPORT(x) RTOP_##x
+
+#if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
+
+#if defined(VERSION_PC)
+// Prefix the symbols rtop shares with other stages so they don't collide
+// in the single PC binary.
+#define EntityBreakableWall RTOP_EntityBreakableWall
+#define EntityLionLamp RTOP_EntityLionLamp
+#define EntitySecretStairs RTOP_EntitySecretStairs
+#define EntitySkeletonPieces RTOP_EntitySkeletonPieces
+#define EntityStairSwitch RTOP_EntityStairSwitch
+#define EntityTriangleElevator RTOP_EntityTriangleElevator
+#define EntityTriggerBeforeCastleWarp RTOP_EntityTriggerBeforeCastleWarp
+#define PlayerIsWithinHitbox RTOP_PlayerIsWithinHitbox
+#define g_EInitSkeletonPieces RTOP_g_EInitSkeletonPieces
+#define g_EInitSkullLord RTOP_g_EInitSkullLord
+#define g_EInitSkullLordEffects RTOP_g_EInitSkullLordEffects
+#define g_EInitTombstone RTOP_g_EInitTombstone
+#define cloudVectorOne RTOP_cloudVectorOne
+#define cloudVectorTwo RTOP_cloudVectorTwo
+#define cloudVectorThree RTOP_cloudVectorThree
+#define cloudVectorFour RTOP_cloudVectorFour
+#define data RTOP_data
+#define empty RTOP_empty
+#define s_RoofTextureData RTOP_s_RoofTextureData
+#define s_TowerTextureData RTOP_s_TowerTextureData
+#define s_ClockRoofScript RTOP_s_ClockRoofScript
+#define s_ClockTowerScript RTOP_s_ClockTowerScript
+#define s_ClockVertexSets RTOP_s_ClockVertexSets
+#define LionLampAnim RTOP_LionLampAnim
+#define D_us_80181BFC RTOP_D_us_80181BFC
+#endif
 #define INVERTED_STAGE
 
 enum OVL_EXPORT(Palette) {
@@ -59,7 +93,9 @@ extern EInit g_EInitUnkId13;
 extern EInit g_EInitLockCamera;
 extern EInit g_EInitCommon;
 extern EInit g_EInitDamageNum;
+#ifndef VERSION_PC
 extern EInit __unused__;
+#endif
 extern EInit g_EInitRTOPCommon;
 extern EInit g_EInitTombstone;
 extern EInit g_EInitSkeletonPieces;

@@ -6,6 +6,10 @@
 #define OVL_EXPORT(x) NO1_##x
 
 #if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
+
+#if defined(VERSION_PC)
 // Prefix the symbols no1 shares with other stages so they don't collide
 // in the single PC binary.
 #define D_80195DB0 NO1_D_80195DB0

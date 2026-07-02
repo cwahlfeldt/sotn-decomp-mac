@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Prefixes for the raw gfx/palette symbols dumped in pc_data.c: different
+// overlays reuse the same D_<vram> names for different data, so they must be
+// namespaced in the single PC binary.
+#ifndef RARE_PC_DATA_H
+#define RARE_PC_DATA_H
+#define D_80182DFC RARE_D_80182DFC
+#define D_80183AEC RARE_D_80183AEC
+#define D_80184B18 RARE_D_80184B18
+#define D_80185AF8 RARE_D_80185AF8
+#define D_80186B98 RARE_D_80186B98
+#define D_80187CE4 RARE_D_80187CE4
+#define D_80188BF4 RARE_D_80188BF4
+#define D_80189704 RARE_D_80189704
+#define D_8018A67C RARE_D_8018A67C
+#define D_8018B5A8 RARE_D_8018B5A8
+#define D_8018C5B8 RARE_D_8018C5B8
+#define D_8018D520 RARE_D_8018D520
+#define D_8018E2EC RARE_D_8018E2EC
+#define D_8018E564 RARE_D_8018E564
+#define D_8018F348 RARE_D_8018F348
+#define D_8018FC10 RARE_D_8018FC10
+#define D_8018FF84 RARE_D_8018FF84
+#define D_801903B0 RARE_D_801903B0
+#define D_80190C08 RARE_D_80190C08
+#define D_8019194C RARE_D_8019194C
+#define D_801925F4 RARE_D_801925F4
+#define D_801928B4 RARE_D_801928B4
+#define D_80192A34 RARE_D_80192A34
+#define D_80192B74 RARE_D_80192B74
+#define D_80192C34 RARE_D_80192C34
+#define D_80192C54 RARE_D_80192C54
+#endif

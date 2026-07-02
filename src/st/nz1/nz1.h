@@ -5,6 +5,26 @@
 #include <stage.h>
 
 #define OVL_EXPORT(x) NZ1_##x
+
+#if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
+
+#if defined(VERSION_PC)
+#define EntityBreakableWall NZ1_EntityBreakableWall
+#define EntitySecretWallDebris NZ1_EntitySecretWallDebris
+#define PlayerIsWithinHitbox NZ1_PlayerIsWithinHitbox
+#define g_EInitEnvironment NZ1_g_EInitEnvironment
+#define g_EInitFleaArmor NZ1_g_EInitFleaArmor
+#define g_EInitFleaArmorAttackHitbox NZ1_g_EInitFleaArmorAttackHitbox
+#define g_EInitFleaMan NZ1_g_EInitFleaMan
+#define g_EInitMedusaHeadBlue NZ1_g_EInitMedusaHeadBlue
+#define g_EInitMedusaHeadYellow NZ1_g_EInitMedusaHeadYellow
+#define g_EInitSkullLord NZ1_g_EInitSkullLord
+#define g_EInitSkullLordEffects NZ1_g_EInitSkullLordEffects
+#define g_EInitSwordLord NZ1_g_EInitSwordLord
+#define g_EInitSwordLordAttack NZ1_g_EInitSwordLordAttack
+#endif
 #define STAGE_IS_NZ1
 
 enum Palettes {

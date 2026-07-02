@@ -91,14 +91,30 @@ PfnEntityUpdate OVL_EXPORT(EntityUpdates)[] = {
 
 // animSet, animCurFrame, unk5A, palette, enemyID
 EInit OVL_EXPORT(EInitBreakable) = {ANIMSET_DRA(3), 0, 0, 0, 0x000};
+#if !defined(VERSION_PC)
 EInit g_EInitObtainable = {ANIMSET_DRA(3), 0, 0, 0, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitParticle = {ANIMSET_DRA(3), 0, 0, 0, 0x002};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitSpawner = {ANIMSET_DRA(0), 0, 0, 0, 0x004};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitInteractable = {ANIMSET_DRA(0), 0, 0, 0, 0x005};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitUnkId13 = {ANIMSET_DRA(0), 0, 0, 0, 0x002};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitLockCamera = {ANIMSET_DRA(0), 0, 0, 0, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitCommon = {ANIMSET_DRA(0), 0, 0, 0, 0x003};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitDamageNum = {ANIMSET_DRA(0), 0, 0, 0, 0x003};
+#endif
 
 EInit g_EInitEnvironmentBreakable = {ANIMSET_OVL(1), 0, 0, 0, 0x005};
 EInit g_EInitEnvironment = {ANIMSET_OVL(2), 0, 0, 0, 0x005};

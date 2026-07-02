@@ -5,6 +5,10 @@
 #define OVL_EXPORT(x) LIB_##x
 
 #if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
+
+#if defined(VERSION_PC)
 // Prefix the symbols lib shares with other stages so they don't collide
 // in the single PC binary.
 #define EntityLesserDemon LIB_EntityLesserDemon

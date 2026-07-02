@@ -5,6 +5,14 @@
 #include <stage.h>
 
 #define OVL_EXPORT(x) RARE_##x
+
+#if defined(VERSION_PC)
+#define g_EInitEnvironment RARE_g_EInitEnvironment
+#endif
+
+#if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
 #define STAGE_IS_RARE
 #define INVERTED_STAGE
 

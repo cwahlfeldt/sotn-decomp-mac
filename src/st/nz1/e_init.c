@@ -184,14 +184,30 @@ PfnEntityUpdate OVL_EXPORT(EntityUpdates)[] = {
 // clang-format off
 // animSet, animCurFrame, unk5A, palette, enemyID
 EInit OVL_EXPORT(EInitBreakable) = {ANIMSET_OVL(1), 0, 0, PAL_NONE, 0x000};
+#if !defined(VERSION_PC)
 EInit g_EInitObtainable = {ANIMSET_DRA(3), 0, 0, PAL_NONE, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitParticle = {ANIMSET_DRA(3), 0, 0, PAL_NONE, 0x002};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitSpawner = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x004};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitInteractable = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x005};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitUnkId13 = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x002};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitLockCamera = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitCommon = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x003};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitDamageNum = {ANIMSET_DRA(0), 0, 0, PAL_NONE, 0x003};
+#endif
 EInit g_EInitEnvironment = {ANIMSET_OVL(1), 0, 0, PAL_NONE, 0x005};
 EInit g_EInitSkullLord = {ANIMSET_OVL(3), 1, 76, PAL_UNK_200, 0x105};
 EInit g_EInitSkullLordEffects = {ANIMSET_OVL(3), 1, 76, PAL_UNK_200, 0x005};

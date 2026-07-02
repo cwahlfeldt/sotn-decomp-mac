@@ -8,6 +8,37 @@
 
 #define OVL_EXPORT(x) TOP_##x
 
+#if defined(VERSION_PC)
+#include "pc_data.h"
+#endif
+
+#if defined(VERSION_PC)
+// Prefix the symbols top shares with other stages so they don't collide
+// in the single PC binary.
+#define EntityBreakableWall TOP_EntityBreakableWall
+#define EntityLionLamp TOP_EntityLionLamp
+#define EntitySecretStairs TOP_EntitySecretStairs
+#define EntityStairSwitch TOP_EntityStairSwitch
+#define EntityTriangleElevator TOP_EntityTriangleElevator
+#define EntityTriggerBeforeCastleWarp TOP_EntityTriggerBeforeCastleWarp
+#define PlayerIsWithinHitbox TOP_PlayerIsWithinHitbox
+#define g_EInitAxeKnight TOP_g_EInitAxeKnight
+#define g_EInitAxeKnightAxe TOP_g_EInitAxeKnightAxe
+#define cloudVectorOne TOP_cloudVectorOne
+#define cloudVectorTwo TOP_cloudVectorTwo
+#define cloudVectorThree TOP_cloudVectorThree
+#define cloudVectorFour TOP_cloudVectorFour
+#define data TOP_data
+#define empty TOP_empty
+#define s_RoofTextureData TOP_s_RoofTextureData
+#define s_TowerTextureData TOP_s_TowerTextureData
+#define s_ClockRoofScript TOP_s_ClockRoofScript
+#define s_ClockTowerScript TOP_s_ClockTowerScript
+#define s_ClockVertexSets TOP_s_ClockVertexSets
+#define LionLampAnim TOP_LionLampAnim
+#define D_us_80181BFC TOP_D_us_80181BFC
+#endif
+
 enum OVL_EXPORT(Palette) {
     PAL_NONE = 0,
     PAL_BREAKABLE = 0x238,

@@ -246,6 +246,8 @@ void InitStageLIB(Overlay* o);
 void InitStageNO1(Overlay* o);
 void InitStageRARE(Overlay* o);
 void InitStageTOP(Overlay* o);
+void InitStageNZ1(Overlay* o);
+void InitStageRTOP(Overlay* o);
 void InitStageNZ0(Overlay* o);
 void InitStageST0(Overlay* o);
 void InitStageWRP(Overlay* o);
@@ -535,6 +537,12 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
             break;
         case STAGE_TOP:
             InitStageTOP(&g_api.o);
+            break;
+        case STAGE_NZ1:
+            InitStageNZ1(&g_api.o);
+            break;
+        case STAGE_RTOP:
+            InitStageRTOP(&g_api.o);
             break;
         case STAGE_NZ0:
             InitStageNZ0(&g_api.o);

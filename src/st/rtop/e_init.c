@@ -90,7 +90,9 @@ EInit OVL_EXPORT(EInitBreakable) = {ANIMSET_OVL(1), 0, 0, 0x0, 0};
 
 #include "../e_init_common.h"
 
+#ifndef VERSION_PC
 static EInit __unused__ = {ANIMSET_OVL(1), 0, 0, 0x0, 3};
+#endif
 EInit g_EInitRTOPCommon = {ANIMSET_OVL(2), 0, 0, 0x0, 5};
 EInit g_EInitTombstone = {ANIMSET_OVL(5), 21, 0x4D, 0x208, 0x71};
 EInit g_EInitSkeletonPieces = {ANIMSET_OVL(6), 1, 0x56, 0x20A, 0x78};
