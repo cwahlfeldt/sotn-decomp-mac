@@ -867,6 +867,57 @@ set(SOURCE_FILES_STAGE_RCAT
     src/st/rcat/unk_323D8.c
 )
 
+set(SOURCE_FILES_STAGE_LIB
+    src/pc/stages/stage_lib.c
+    src/st/lib/gen/e_laydef.c
+    src/st/lib/gen/e_layout.c
+    src/st/lib/gen/rooms.c
+    src/st/lib/gen/sprites.c
+    src/st/lib/background_block_init.c
+    src/st/lib/collision.c
+    src/st/lib/create_entity.c
+    src/st/lib/cutscene_data.c
+    src/st/lib/cutscene.c
+    src/st/lib/e_bloody_zombie.c
+    src/st/lib/e_breakable.c
+    src/st/lib/e_candle_table.c
+    src/st/lib/e_chair.c
+    src/st/lib/e_collect.c
+    src/st/lib/e_dhuron.c
+    src/st/lib/e_ectoplasm.c
+    src/st/lib/e_flea_armor.c
+    src/st/lib/e_flea_man.c
+    src/st/lib/e_flying_zombie.c
+    src/st/lib/e_init.c
+    src/st/lib/e_lesser_demon.c
+    src/st/lib/e_library_bg.c
+    src/st/lib/e_life_up.c
+    src/st/lib/e_lock_camera.c
+    src/st/lib/e_misc.c
+    src/st/lib/e_mist_door.c
+    src/st/lib/e_mudman.c
+    src/st/lib/e_particles.c
+    src/st/lib/e_red_door_tiles.c
+    src/st/lib/e_red_door.c
+    src/st/lib/e_room_bg.c
+    src/st/lib/e_room_fg.c
+    src/st/lib/e_shop.c
+    src/st/lib/e_skeleton.c
+    src/st/lib/e_spellbook_magic_tome.c
+    src/st/lib/e_stage_name.c
+    src/st/lib/en_thornweed_corpseweed.c
+    src/st/lib/first_c_file.c
+    src/st/lib/header.c
+    src/st/lib/pc_data.c
+    src/st/lib/popup.c
+    src/st/lib/prim_helpers.c
+    src/st/lib/st_common.c
+    src/st/lib/st_update.c
+    src/st/lib/tilemaps.c
+    src/st/lib/unk_3B200.c
+    src/st/lib/unk_3B53C.c
+)
+
 set(SOURCE_FILES_STAGE_NO0
     src/pc/stages/stage_no0.c
     src/st/no0/gen/rooms.c
@@ -1184,6 +1235,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_RCAT}
     ${SOURCE_FILES_STAGE_NO4}
     ${SOURCE_FILES_STAGE_NO0}
+    ${SOURCE_FILES_STAGE_LIB}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

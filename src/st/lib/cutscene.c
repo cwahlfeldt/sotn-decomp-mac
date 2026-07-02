@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 #include "lib.h"
-#include "../cutscene.h"
+#include <cutscene.h>
 
 extern u8 D_us_80183F60;
 static u8 D_us_801819BC[] = {0x00, 0x40, 0x00, 0x00};

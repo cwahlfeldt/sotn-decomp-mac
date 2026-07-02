@@ -70,6 +70,9 @@ static unkBookStruct D_us_8018316C[] = {
     {&D_us_80180950, 0xF600, 0xF640, 0x001C, 0x0014, 0x17}};
 
 void func_us_801D1BCC(void) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     SVECTOR rot;
     VECTOR trans;
     MATRIX m;

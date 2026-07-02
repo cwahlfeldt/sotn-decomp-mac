@@ -45,6 +45,9 @@ static s16 D_us_80180DB0[] = {0x00, 0x3C, 0x40, 0x58};
 STATIC_PAD_DATA(8);
 
 void func_us_801AE8E8(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     s32 primIndex;
     long p, flag;
     SVECTOR rot;

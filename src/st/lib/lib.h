@@ -4,6 +4,27 @@
 #define STAGE_IS_LIB
 #define OVL_EXPORT(x) LIB_##x
 
+#if defined(VERSION_PC)
+// Prefix the symbols lib shares with other stages so they don't collide
+// in the single PC binary.
+#define EntityLesserDemon LIB_EntityLesserDemon
+#define EntityLesserDemonSpit LIB_EntityLesserDemonSpit
+#define func_801CDC80 LIB_func_801CDC80
+#define PlayerIsWithinHitbox LIB_PlayerIsWithinHitbox
+#define g_EInitBloodyZombie LIB_g_EInitBloodyZombie
+#define g_EInitCorpseweed LIB_g_EInitCorpseweed
+#define g_EInitCorpseweedProjectile LIB_g_EInitCorpseweedProjectile
+#define g_EInitFleaArmor LIB_g_EInitFleaArmor
+#define g_EInitFleaArmorAttackHitbox LIB_g_EInitFleaArmorAttackHitbox
+#define g_EInitFleaMan LIB_g_EInitFleaMan
+#define g_EInitLesserDemon LIB_g_EInitLesserDemon
+#define g_EInitLesserDemonSpit LIB_g_EInitLesserDemonSpit
+#define g_EInitSkeleton LIB_g_EInitSkeleton
+#define g_EInitSkeletonBone LIB_g_EInitSkeletonBone
+#define g_EInitSkeletonPieces LIB_g_EInitSkeletonPieces
+#define g_EInitThornweed LIB_g_EInitThornweed
+#endif
+
 enum Palettes {
     PAL_NONE = 0,
     PAL_BREAKABLE = 0x26C,

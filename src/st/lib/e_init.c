@@ -172,14 +172,28 @@ PfnEntityUpdate OVL_EXPORT(EntityUpdates)[] = {
 };
 
 EInit OVL_EXPORT(EInitBreakable) = {ANIMSET_DRA(0x00), 0, 0, 0x0000, 0x000};
+#if !defined(VERSION_PC)
 EInit g_EInitObtainable = {ANIMSET_DRA(0x03), 0x00, 0x00, 0x0000, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitParticle = {ANIMSET_DRA(0x03), 0x00, 0x00, 0x0000, 0x002};
+#endif
 EInit D_us_80180824 = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x004};
+#if !defined(VERSION_PC)
 EInit g_EInitInteractable = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x005};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitUnkId13 = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x002};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitLockCamera = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x001};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitCommon = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x003};
+#endif
+#if !defined(VERSION_PC)
 EInit g_EInitDamageNum = {ANIMSET_DRA(0x00), 0x00, 0x00, 0x0000, 0x003};
+#endif
 EInit g_EInitBloodyZombie = {ANIMSET_OVL(0x05), 0x01, 0x48, 0x0207, 0x00D};
 EInit g_EInitFlyingZombie2 = {ANIMSET_OVL(0x06), 0x01, 0x49, 0x020A, 0x00F};
 EInit g_EInitFlyingZombie1 = {ANIMSET_OVL(0x06), 0x00, 0x49, 0x020A, 0x00E};
