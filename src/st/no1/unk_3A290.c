@@ -29,6 +29,9 @@ static SVECTOR D_us_801814D8 = {FLT(0), FLT(0), FLT(1)}; // unused
 
 // This is the spyglass at the bottom of NO1
 void func_us_801BA290(Entity* self) {
+#ifdef VERSION_PC
+    u8 sp[SP_LEN];
+#endif
     long p, flag;
     s32 pad[23];
     SVECTOR rotA, rotB, rotC, rotD;

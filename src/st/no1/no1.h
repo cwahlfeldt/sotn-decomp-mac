@@ -5,6 +5,33 @@
 
 #define OVL_EXPORT(x) NO1_##x
 
+#if defined(VERSION_PC)
+// Prefix the symbols no1 shares with other stages so they don't collide
+// in the single PC binary.
+#define D_80195DB0 NO1_D_80195DB0
+#define D_us_80180980 NO1_D_us_80180980
+#define D_us_8018098C NO1_D_us_8018098C
+#define D_us_80180A88 NO1_D_us_80180A88
+#define D_us_80180AA0 NO1_D_us_80180AA0
+#define D_us_80180AE8 NO1_D_us_80180AE8
+#define D_us_80180AF4 NO1_D_us_80180AF4
+#define g_EInitArmorLord NO1_g_EInitArmorLord
+#define g_EInitAxeKnight NO1_g_EInitAxeKnight
+#define g_EInitAxeKnightAxe NO1_g_EInitAxeKnightAxe
+#define g_EInitBoneArcher NO1_g_EInitBoneArcher
+#define g_EInitBoneArcherArrow NO1_g_EInitBoneArcherArrow
+#define g_EInitBoneMusket NO1_g_EInitBoneMusket
+#define g_EInitSkeleton NO1_g_EInitSkeleton
+#define g_EInitSkeletonApe NO1_g_EInitSkeletonApe
+#define g_EInitSkeletonApeBarrel NO1_g_EInitSkeletonApeBarrel
+#define g_EInitSkeletonApePunch NO1_g_EInitSkeletonApePunch
+#define g_EInitSkeletonBone NO1_g_EInitSkeletonBone
+#define g_EInitSkeletonPieces NO1_g_EInitSkeletonPieces
+#define g_EInitSpearGuard NO1_g_EInitSpearGuard
+#define g_EInitThrownSpear NO1_g_EInitThrownSpear
+#define g_EInitWereskeleton NO1_g_EInitWereskeleton
+#endif
+
 void EntityExplosionVariants(Entity* entity);
 void EntityGreyPuff(Entity* entity);
 
