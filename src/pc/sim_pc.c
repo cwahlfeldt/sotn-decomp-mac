@@ -244,6 +244,7 @@ void InitStageNO4(Overlay* o);
 void InitStageNO0(Overlay* o);
 void InitStageLIB(Overlay* o);
 void InitStageNO1(Overlay* o);
+void InitStageRARE(Overlay* o);
 void InitStageNZ0(Overlay* o);
 void InitStageST0(Overlay* o);
 void InitStageWRP(Overlay* o);
@@ -527,6 +528,9 @@ s32 LoadFileSim(s32 fileId, SimFileType type) {
             break;
         case STAGE_NO1:
             InitStageNO1(&g_api.o);
+            break;
+        case STAGE_RARE:
+            InitStageRARE(&g_api.o);
             break;
         case STAGE_NZ0:
             InitStageNZ0(&g_api.o);

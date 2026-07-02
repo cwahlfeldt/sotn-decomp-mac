@@ -867,6 +867,44 @@ set(SOURCE_FILES_STAGE_RCAT
     src/st/rcat/unk_323D8.c
 )
 
+set(SOURCE_FILES_STAGE_RARE
+    src/pc/stages/stage_rare.c
+    src/st/rare/gen/e_laydef.c
+    src/st/rare/gen/e_layout.c
+    src/st/rare/gen/rooms.c
+    src/st/rare/gen/sprites.c
+    src/st/rare/collision.c
+    src/st/rare/create_entity.c
+    src/st/rare/d_prize_drops.c
+    src/st/rare/e_azaghal.c
+    src/st/rare/e_background_door_rubble.c
+    src/st/rare/e_boss_doors.c
+    src/st/rare/e_boss_torch.c
+    src/st/rare/e_breakable.c
+    src/st/rare/e_collect.c
+    src/st/rare/e_fountain_water.c
+    src/st/rare/e_init.c
+    src/st/rare/e_lock_camera.c
+    src/st/rare/e_minotaur.c
+    src/st/rare/e_misc.c
+    src/st/rare/e_particles.c
+    src/st/rare/e_red_door.c
+    src/st/rare/e_room_bg.c
+    src/st/rare/e_room_fg.c
+    src/st/rare/e_secrets.c
+    src/st/rare/e_stage_name.c
+    src/st/rare/e_stone_skull.c
+    src/st/rare/e_werewolf.c
+    src/st/rare/e_white_dragon.c
+    src/st/rare/header.c
+    src/st/rare/pc_data.c
+    src/st/rare/popup.c
+    src/st/rare/prim_helpers.c
+    src/st/rare/st_common.c
+    src/st/rare/st_update.c
+    src/st/rare/tilemaps.c
+)
+
 set(SOURCE_FILES_STAGE_NO1
     src/pc/stages/stage_no1.c
     src/st/no1/gen/e_laydef.c
@@ -1291,6 +1329,7 @@ set(SOURCE_FILES_CORE
     ${SOURCE_FILES_STAGE_NO0}
     ${SOURCE_FILES_STAGE_LIB}
     ${SOURCE_FILES_STAGE_NO1}
+    ${SOURCE_FILES_STAGE_RARE}
     ${SOURCE_FILES_STAGE_NZ0}
     ${SOURCE_FILES_STAGE_ST0}
     ${SOURCE_FILES_BOSS_BO4}

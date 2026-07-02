@@ -963,6 +963,15 @@ files:
     asset_path: assets/st/top
     src_path: src/st/top
     splat_config_path: config/splat.us.sttop.yaml
+    segments:
+      - start: 0
+        vram: 0x80180000
+        assets:
+          - [0x354, paldef, palette_def]
+          - [0x4C4, layers, layers]
+          - [0x630, gfx_banks, graphics_banks]
+          - [0x740, layout, entity_layouts]
+          - [0x8E8, skip]
   - target: disks/us/ST/WRP/WRP.BIN
     asset_path: assets/st/wrp
     src_path: src/st/wrp
@@ -989,6 +998,16 @@ files:
     asset_path: assets/st/rare
     src_path: src/st/rare
     splat_config_path: config/splat.us.strare.yaml
+    segments:
+      - start: 0
+        vram: 0x80180000
+        assets:
+          - [0x2C, sprite_banks, sprite_banks]
+          - [0x8C, paldef, palette_def]
+          - [0xE0, layers, layers]
+          - [0x2B0, gfx_banks, graphics_banks]
+          - [0x4BC, layout, entity_layouts]
+          - [0x664, skip]
   - target: disks/us/ST/RCAT/RCAT.BIN
     asset_path: assets/st/rcat
     src_path: src/st/rcat
