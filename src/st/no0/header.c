@@ -22,7 +22,7 @@ AbbreviatedOverlay OVL_EXPORT(Overlay) = {
     .UpdateStageEntities = UpdateStageEntities,
 };
 
-#ifdef VERSION_US
+#if defined(VERSION_US) || defined(VERSION_PC)
 #include "gen/sprite_banks.h"
 #include "gen/palette_def.h"
 #include "gen/layers.h"

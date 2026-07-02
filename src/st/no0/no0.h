@@ -5,6 +5,35 @@
 
 #define OVL_EXPORT(x) NO0_##x
 
+#if defined(VERSION_PC)
+// Prefix the symbols no0 shares with other stages so they don't collide
+// in the single PC binary.
+#define D_us_80180A88 NO0_D_us_80180A88
+#define D_us_80180AA0 NO0_D_us_80180AA0
+#define D_us_80180B90 NO0_D_us_80180B90
+#define e_explosion_g NO0_e_explosion_g
+#define e_explosion_unk_1 NO0_e_explosion_unk_1
+#define e_explosion_unk_2 NO0_e_explosion_unk_2
+#define e_skelerang_1 NO0_e_skelerang_1
+#define e_skelerang_2 NO0_e_skelerang_2
+#define e_skelerang_pal NO0_e_skelerang_pal
+#define EntityStatue NO0_EntityStatue
+#define PlayerIsWithinHitbox NO0_PlayerIsWithinHitbox
+#define g_EInitAxeKnight NO0_g_EInitAxeKnight
+#define g_EInitAxeKnightAxe NO0_g_EInitAxeKnightAxe
+#define g_EInitCtulhu NO0_g_EInitCtulhu
+#define g_EInitCtulhuFireball NO0_g_EInitCtulhuFireball
+#define g_EInitCtulhuIceShockwave NO0_g_EInitCtulhuIceShockwave
+#define g_EInitElevator NO0_g_EInitElevator
+#define g_EInitFleaMan NO0_g_EInitFleaMan
+#define g_EInitPlateLord NO0_g_EInitPlateLord
+#define g_EInitSkelerang NO0_g_EInitSkelerang
+#define g_EInitSkelerangBoomerang NO0_g_EInitSkelerangBoomerang
+#define g_EInitSkeleton NO0_g_EInitSkeleton
+#define g_EInitSkeletonBone NO0_g_EInitSkeletonBone
+#define g_EInitSkeletonPieces NO0_g_EInitSkeletonPieces
+#endif
+
 void EntityExplosionVariants(Entity* entity);
 void EntityGreyPuff(Entity* entity);
 
