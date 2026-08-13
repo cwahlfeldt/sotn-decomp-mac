@@ -33,7 +33,7 @@ void GlDrawOTag(OT_TYPE* p);
 // 120 Hz). Cap the frame cadence to the game's native NTSC 60 Hz here, the one
 // place every frame passes through. Vsync stays on for tear-free output; this
 // just holds each frame until the next 1/60 s boundary.
-#define SOTN_FPS 60
+#define SOTN_FPS 120
 static void LimitFrameRate(void) {
     static Uint64 nextFrame = 0;
     const Uint64 freq = SDL_GetPerformanceFrequency();

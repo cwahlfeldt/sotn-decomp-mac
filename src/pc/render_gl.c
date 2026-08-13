@@ -23,8 +23,9 @@ extern bool g_IsQuitRequested;
 extern SDL_Window* g_Window;
 extern u16 g_RawVram[VRAM_W * VRAM_H];
 
-extern int g_WndWidth;
-extern int g_WndHeight;
+extern int g_DispWidth;
+extern int g_DispHeight;
+void ToggleFullscreen(void);
 
 void GlSetDrawEnv(DR_ENV* dr_env, DRAWENV* env) { NOT_IMPLEMENTED; }
 
@@ -147,7 +148,6 @@ int GlDrawSync(int mode) {
     }
 
     SDL_RenderPresent(g_Renderer);
-    SDL_RenderSetScale(g_Renderer, g_GameParams.scale, g_GameParams.scale);
 
     // SDL event handling
     SDL_Event event;
@@ -155,6 +155,11 @@ int GlDrawSync(int mode) {
         switch (event.type) {
         case SDL_QUIT:
             g_IsQuitRequested = 1;
+            break;
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_F11) {
+                ToggleFullscreen();
+            }
             break;
         }
     }
@@ -169,15 +174,13 @@ int GlDrawSync(int mode) {
 }
 
 DISPENV* GlPutDispEnv(DISPENV* env) {
-    int w = env->disp.w * g_GameParams.scale;
-    int h = env->disp.h * g_GameParams.scale;
-    if (g_WndWidth == w && g_WndHeight == h) {
+    if (g_DispWidth == env->disp.w && g_DispHeight == env->disp.h) {
         return env;
     }
 
-    g_WndWidth = w;
-    g_WndHeight = h;
-    SDL_SetWindowSize(g_Window, w, h);
+    g_DispWidth = env->disp.w;
+    g_DispHeight = env->disp.h;
+    SDL_RenderSetLogicalSize(g_Renderer, g_DispWidth, g_DispHeight);
     return env;
 }
 

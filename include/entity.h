@@ -1759,7 +1759,8 @@ typedef struct {
     /* 0x89 */ u8 : 8;
     /* 0x8A */ u8 explosionTimer2;
     /* 0x8B */ s8 : 8;
-    /* 0x8C */ s32 : 32;
+    /* 0x8C */ s16 bounceCount; // used by RNO3 Jack O'Bones thrown bone
+    /* 0x8E */ s16 : 16;
     /* 0x90 */ s32 : 32;
     /* 0x94 */ s32 : 32;
     /* 0x98 */ s32 : 32;
@@ -1958,6 +1959,7 @@ typedef struct {
     /* 0x8E */ char pad_8E[0x3];
     /* 0x91 */ u8 clutOffset;
     /* 0x92 */ u8 nextAttackIsDarts;
+    /* 0x93 */ u8 tendrilsReady; // RNO3: count of tendrils ready to attack
     /* 0x94 */ char pad_94[0x10];
     /* 0xA4 */ struct Entity* entity;
 } ET_VenusWeedFlower;
@@ -1966,8 +1968,9 @@ typedef struct { // TODO: Not sure about this yet
     /* 0x7C */ char pad_7C[0x10];
     /* 0x8C */ s16 timer;
     /* 0x8E */ char pad_8E[0x2];
-    /* 0x90 */ u8 spikeStartTimeOffsetIndex;
+    /* 0x90 */ u8 spikeStartTimeOffsetIndex; // RNO3: charge-attack trigger
     /* 0x91 */ char pad_91[0x2];
+    /* 0x93 */ u8 attackTrigger; // RNO3: set by flower to start attack step
     /* 0x94 */ s16 targetX;
     /* 0x96 */ char pad_96[0xE];
     /* 0xA4 */ struct Entity* entity;
@@ -1988,6 +1991,51 @@ typedef struct {
     /* 0x80 */ char pad_80[0x24];
     /* 0xA4 */ struct Entity* flower;
 } ET_VenusWeedSpike;
+
+// RNO3 Nova Skeleton
+typedef struct {
+    /* 0x7C */ char pad_7C[0x4];
+    /* 0x80 */ u8 facingCache;
+    /* 0x81 */ u8 attackTimer;
+    /* 0x82 */ u8 attackTimerIndex;
+    /* 0x83 */ u8 explosionTimer; // death parts
+    /* 0x84 */ char pad_84[0x4];
+    /* 0x88 */ u8 beamStep;
+    /* 0x89 */ char pad_89[0x3];
+    /* 0x8C */ s16 beamScale;
+    /* 0x8E */ s16 beamRot;
+} ET_NovaSkeleton;
+
+// RNO3 Nova Skeleton laser beam and after-glow
+typedef struct {
+    /* 0x7C */ char pad_7C[0xA];
+    /* 0x86 */ u16 timer;
+    /* 0x88 */ char pad_88[0x8];
+    /* 0x90 */ u16 width;
+    /* 0x92 */ u16 halfHeight;
+    /* 0x94 */ u32 traveled;
+} ET_NovaSkeletonBeam;
+
+// RNO3 Orobourous serpent (both variants) and their riders
+typedef struct {
+    /* 0x7C */ char pad_7C[0x4];
+    /* 0x80 */ u16 stepTimer;
+    /* 0x82 */ char pad_82[0x2];
+    /* 0x84 */ u8 facingCache;
+    /* 0x85 */ u8 bounceCount; // also hitbox-helper segment index
+    /* 0x86 */ u8 gathered;
+    /* 0x87 */ char pad_87[0x1];
+    /* 0x88 */ s32 gravityAccel;
+    /* 0x8C */ char pad_8C[0x4];
+    /* 0x90 */ u16 chaseTimer;
+    /* 0x92 */ s16 angle;
+    /* 0x94 */ s16 restTime;
+    /* 0x96 */ char pad_96[0x2];
+    /* 0x98 */ s16 targetX;
+    /* 0x9A */ s16 targetY;
+    /* 0x9C */ char pad_9C[0x16];
+    /* 0xB2 */ u16 unkB2;
+} ET_Orobourous;
 
 // ==========================
 
@@ -4042,6 +4090,13 @@ typedef struct {
     /* 0x7C */ u16 unk7C;
 } ET_PlatformUnk;
 
+typedef struct {
+    /* 0x7C */ s32 : 32;
+    /* 0x80 */ u16 timer;
+    /* 0x82 */ s16 : 16;
+    /* 0x84 */ s16 speedUp;
+} ET_DodoBird;
+
 typedef union { // offset=0x7C
     struct Primitive* prim;
     ET_Placeholder ILLEGAL;
@@ -4162,6 +4217,7 @@ typedef union { // offset=0x7C
     ET_3DBackgroundhouse bghouse;
     ET_LifeUpSpawn lifeUpSpawn;
     ET_AxeKnight axeknight;
+    ET_DodoBird dodoBird;
     ET_Owl owl;
     ET_AlucardWaterEffect aluwater;
     ET_80123B40 et_80123B40;
@@ -4222,6 +4278,9 @@ typedef union { // offset=0x7C
     ET_VenusWeedTendril venusWeedTendril;
     ET_VenusWeedDart venusWeedDart;
     ET_VenusWeedSpike venusWeedSpike;
+    ET_NovaSkeleton novaSkeleton;
+    ET_NovaSkeletonBeam novaSkeletonBeam;
+    ET_Orobourous orobourous;
     ET_ExpandingCircle circleExpand;
     ET_RicMariaPower ricMariaPower;
     ET_RicMaria ricMaria;

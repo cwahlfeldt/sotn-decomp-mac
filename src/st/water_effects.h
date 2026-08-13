@@ -24,6 +24,48 @@ static s32 g_SmallWaterDropVel[] = {
     FIX(-1.5),  FIX(-1.6875), FIX(-0.75),  FIX(-1.375),
     FIX(-0.25), FIX(-1.4375), FIX(-0.375), FIX(-1.875)};
 
+#if defined(STAGE_IS_RNO3)
+// The reverse castle keeps the normal castle's water coordinate table and
+// mirrors it at runtime using the room dimensions.
+static u16 func_801C4144(s16 arg0, s16 arg1, s16 arg2, s16* arg3) {
+    s16 temp;
+    s16 temp2;
+    s16 x1;
+    s16* ptr;
+
+    ptr = &g_WaterXTbl[arg0 * 8];
+    temp = *ptr++;
+    x1 = *ptr++;
+    arg1 -= (u16)g_Tilemap.width - temp;
+    arg1 += x1;
+    if (arg1 < 0) {
+        return 0;
+    }
+    *arg3++ = arg1;
+
+    temp = x1 - arg1;
+    if (temp <= 0) {
+        return 0;
+    }
+    *arg3 = temp;
+
+    temp2 = g_splashAspects[*ptr++];
+    if (temp2) {
+        temp2 = temp / temp2;
+    } else {
+        temp2 = 0;
+    }
+
+    temp2 += (u16)g_Tilemap.height - *ptr++;
+    if (temp2 < arg2) {
+        return 0;
+    }
+    if (!(g_Tilemap.height - *ptr++ < arg2)) {
+        return 0;
+    }
+    return (temp2 - 0x8000) - arg2;
+}
+#else
 static u16 func_801C4144(s16 arg0, s16 arg1, s16 arg2, s16* arg3) {
     s16 temp;
     s16* ptr;
@@ -57,7 +99,274 @@ static u16 func_801C4144(s16 arg0, s16 arg1, s16 arg2, s16* arg3) {
     }
     return ((arg2 + 0x7FFF) + 1) - temp;
 }
+#endif
 
+#if defined(STAGE_IS_RNO3)
+// Reverse-castle variant: water surfaces hang from the ceiling, so the
+// vertical offsets, velocity checks and push direction are mirrored, and the
+// retail build kept three Japanese debug prints in this one.
+void EntityAlucardWaterEffect(Entity* self) {
+    s16 sp10[2];
+    u16 posX, posY;
+    u16 sp28;
+    Entity* tempEntity;
+    s16 var_s1;
+    s16 var_s3;
+    s16 i;
+    u16 sp30;
+    u16 var_s6;
+    u32 var_s7;
+    u16 sp4A;
+    s32 status;
+    Entity* player = &PLAYER;
+
+    posX = player->posX.i.hi + g_Tilemap.scrollX.i.hi;
+    status = g_Player.status;
+    if (status & (PLAYER_STATUS_CROUCH | PLAYER_STATUS_TRANSFORM)) {
+        if (status & PLAYER_STATUS_CROUCH) {
+            sp4A = 0x14;
+            if (status & PLAYER_STATUS_WOLF_FORM) {
+                sp4A = 0xA;
+            }
+            var_s6 = 0x19 - sp4A;
+        } else {
+            s16 t = -7;
+            if (status & (PLAYER_STATUS_MIST_FORM | PLAYER_STATUS_BAT_FORM)) {
+                sp4A = 0xC;
+            } else {
+                t = 5;
+                if (status & PLAYER_STATUS_WOLF_FORM) {
+                    sp4A = 0x14;
+                }
+            }
+            var_s6 = t;
+        }
+    } else {
+        sp4A = 0x28;
+        var_s6 = -0xF;
+    }
+    posY = var_s6 + (player->posY.i.hi + g_Tilemap.scrollY.i.hi);
+    var_s3 = var_s1 = self->params;
+    var_s3 &= 0xFF;
+    var_s1 = var_s1 >> 8;
+    for (i = 0; i < var_s1; i++, var_s3++) {
+        sp28 = func_801C4144(var_s3, (s16)posX, (s16)posY, sp10);
+        if (sp28) {
+            sp30 = var_s3 * 8;
+            break;
+        }
+    }
+    FntPrint("x_max %x\n", g_Tilemap.width);
+    FntPrint("mizu_chk %x\n", sp28);
+    FntPrint("sabun %x,%x\n", sp10[0], sp10[1]);
+    var_s3 = sp28 & 0x7FFF;
+    if (self->step) {
+        if (F(player->velocityY).i.hi &&
+            (status & (PLAYER_STATUS_MIST_FORM | PLAYER_STATUS_BAT_FORM)) ==
+                0) {
+            if (F(player->velocityY).i.hi > 0) {
+                if (!sp28) {
+                    var_s1 = self->ext.aluwater.unk7C;
+                    if (var_s1 && (var_s1 & 0x7FFF) < 17) {
+                        var_s1 = self->ext.aluwater.unk88;
+                        if (self->ext.aluwater.unk8C < 14) {
+                            var_s7 = ((14 - self->ext.aluwater.unk8C) << 11) +
+                                     (g_WaterXTbl[var_s1 + 2] << 8) +
+                                     (g_WaterXTbl[var_s1 + 5] << 5);
+                        } else {
+                            if (self->ext.aluwater.unk8E < 14) {
+                                var_s7 =
+                                    ((self->ext.aluwater.unk8E + 14) << 11) +
+                                    (g_WaterXTbl[var_s1 + 2] << 8) +
+                                    (g_WaterXTbl[var_s1 + 6] << 5);
+                            } else {
+                                var_s7 = g_WaterXTbl[var_s1 + 2] << 8;
+                            }
+                        }
+                        var_s1 = (var_s7 >> 8) & 7;
+                        if (!var_s1 || var_s1 == 7) {
+                            var_s1 = (var_s7 >> 5) & 7;
+                            if (!var_s1 || var_s1 == 7) {
+                                var_s1 = 0;
+                            }
+                        }
+                        if (var_s1) {
+                            for (i = 0; i < 8; i++) {
+                                tempEntity = AllocEntity(
+                                    &g_Entities[224], &g_Entities[256]);
+                                if (tempEntity == NULL) {
+                                    break;
+                                }
+                                CreateEntityFromEntity(
+                                    E_SIDE_WATER_SPLASH, player, tempEntity);
+                                tempEntity->params =
+                                    (u16)g_WaterXTbl[self->ext.aluwater.unk88 +
+                                                     7] +
+                                    (var_s1 << 4) + i;
+                                tempEntity->posY.i.hi += var_s6 + var_s3;
+                                tempEntity->zPriority = player->zPriority;
+                            }
+                        } else {
+                            tempEntity =
+                                AllocEntity(&g_Entities[224], &g_Entities[256]);
+                            if (tempEntity != NULL) {
+                                CreateEntityFromEntity(
+                                    E_SPLASH_WATER, player, tempEntity);
+                                tempEntity->posX.i.hi =
+                                    self->ext.aluwater.unk80 -
+                                    g_Tilemap.scrollX.i.hi;
+                                tempEntity->posY.i.hi =
+                                    self->ext.aluwater.unk82 +
+                                    (self->ext.aluwater.unk7C & 0x7FFF) -
+                                    g_Tilemap.scrollY.i.hi;
+                                tempEntity->zPriority = player->zPriority;
+                                if (player->velocityY > FIX(-4)) {
+                                    tempEntity->params = var_s7 + 1;
+                                } else {
+                                    tempEntity->params = var_s7;
+                                }
+                            }
+                        }
+                    }
+                }
+            } else if (sp28 && (var_s3 < 9) && !self->ext.aluwater.unk7C) {
+                if (sp10[0] < 14) {
+                    var_s7 =
+                        ((14 - sp10[0]) << 11) + (g_WaterXTbl[sp30 + 2] << 8) +
+                        (g_WaterXTbl[sp30 + 5] << 5);
+                } else if (sp10[1] < 14) {
+                    var_s7 =
+                        ((sp10[1] + 14) << 11) + (g_WaterXTbl[sp30 + 2] << 8) +
+                        (g_WaterXTbl[sp30 + 6] << 5);
+                } else {
+                    var_s7 = g_WaterXTbl[sp30 + 2] << 8;
+                }
+                var_s1 = (var_s7 >> 8) & 7;
+                if (!var_s1 || var_s1 == 7) {
+                    var_s1 = (var_s7 >> 5) & 7;
+                    if (!var_s1 || var_s1 == 7) {
+                        var_s1 = 0;
+                    }
+                }
+                if (var_s1) {
+                    for (i = 0; i < 8; i++) {
+                        tempEntity =
+                            AllocEntity(&g_Entities[224], &g_Entities[256]);
+                        if (tempEntity == NULL) {
+                            break;
+                        }
+                        CreateEntityFromEntity(
+                            E_SIDE_WATER_SPLASH, player, tempEntity);
+                        tempEntity->params =
+                            (u16)g_WaterXTbl[sp30 + 7] + (var_s1 << 4) + i;
+                        tempEntity->posY.i.hi += var_s6 + var_s3;
+                        tempEntity->zPriority = player->zPriority;
+                    }
+                } else {
+                    tempEntity =
+                        AllocEntity(&g_Entities[224], &g_Entities[256]);
+                    if (tempEntity != NULL) {
+                        CreateEntityFromEntity(
+                            E_SPLASH_WATER, player, tempEntity);
+                        if (player->velocityY >= FIX(-4)) {
+                            tempEntity->params = var_s7 + 2;
+                        } else {
+                            tempEntity->params = var_s7 + 1;
+                        }
+                        tempEntity->params =
+                            var_s7; // this nullifies the above block!
+                        tempEntity->posY.i.hi += var_s6 + var_s3;
+                        tempEntity->zPriority = player->zPriority;
+                    }
+                }
+            }
+        } else if (!(status & PLAYER_STATUS_MIST_FORM) && sp28) {
+            if (!self->ext.aluwater.unk7E) {
+                var_s1 = g_WaterXTbl[sp30 + 7];
+                if ((s16)posX != (s16)self->ext.aluwater.unk80) {
+                    if (var_s3 <= sp4A && sp10[0] >= 6 && sp10[1] >= 6) {
+                        tempEntity =
+                            AllocEntity(&g_Entities[224], &g_Entities[256]);
+                        if (tempEntity != NULL) {
+                            CreateEntityFromEntity(
+                                E_SURFACING_WATER, player, tempEntity);
+                            tempEntity->posY.i.hi += var_s6 + var_s3;
+                            if (player->velocityX != 0) {
+                                tempEntity->params = var_s3 >> 3;
+                                if (tempEntity->params >= 5) {
+                                    tempEntity->params = 4;
+                                }
+                            } else {
+                                tempEntity->params = 0;
+                            }
+                            tempEntity->ext.aluwater.unk88 = sp30;
+                            tempEntity->ext.aluwater.unk8A = var_s1;
+                            tempEntity->params |= g_WaterXTbl[sp30 + 2] << 8;
+                            tempEntity->zPriority = player->zPriority;
+                            self->ext.aluwater.unk7E = 8;
+                        }
+                    }
+                } else if (
+                    var_s1 && var_s3 <= sp4A && sp10[0] >= 6 && sp10[1] >= 6) {
+                    tempEntity =
+                        AllocEntity(&g_Entities[224], &g_Entities[256]);
+                    if (tempEntity != NULL) {
+                        CreateEntityFromEntity(
+                            E_SURFACING_WATER, player, tempEntity);
+                        tempEntity->posY.i.hi += var_s6 + var_s3;
+                        tempEntity->ext.aluwater.unk8A = var_s1;
+                        tempEntity->params = g_WaterXTbl[sp30 + 2] << 8;
+                        tempEntity->ext.aluwater.unk88 = sp30;
+                        tempEntity->zPriority = player->zPriority;
+                        self->ext.aluwater.unk7E = 8;
+                    }
+                }
+            }
+            if (sp28) {
+                var_s1 = g_WaterXTbl[sp30 + 7];
+                if ((u16)(var_s1 + 0x1000) > 0x2000) {
+                    if (var_s3 >= sp4A) {
+                        if (status & PLAYER_STATUS_BAT_FORM) {
+                            var_s1 = var_s1 * 3 / 4;
+                        } else {
+                            var_s1 /= 2;
+                        }
+                    } else {
+                        var_s1 = (var_s1 * var_s3) / 0x50;
+                    }
+                    if ((var_s1 < 0 &&
+                         !(g_Player.vram_flag & TOUCHING_L_WALL)) ||
+                        (var_s1 > 0 &&
+                         !(g_Player.vram_flag & TOUCHING_R_WALL))) {
+                        i = player->posX.i.hi;
+                        player->posX.val -= var_s1 << 4;
+                        g_unkGraphicsStruct.shoveX.i.hi +=
+                            player->posX.i.hi - i;
+                    }
+                }
+            }
+        }
+        if (self->ext.aluwater.unk7E) {
+            self->ext.aluwater.unk7E--;
+        }
+        g_unkGraphicsStruct.D_80097448 = var_s3;
+        if (var_s3 > 4) {
+            g_unkGraphicsStruct.D_8009744C = var_s3 - 4;
+        } else {
+            g_unkGraphicsStruct.D_8009744C = 0;
+        }
+        g_unkGraphicsStruct.D_80097450 = var_s3;
+    } else {
+        InitializeEntity(g_EInitSpawner);
+    }
+    self->ext.aluwater.unk7C = sp28;
+    self->ext.aluwater.unk80 = posX;
+    self->ext.aluwater.unk82 = posY;
+    self->ext.aluwater.unk88 = sp30;
+    self->ext.aluwater.unk8C = sp10[0];
+    self->ext.aluwater.unk8E = sp10[1];
+}
+#else
 void EntityAlucardWaterEffect(Entity* self) {
     s16 sp10[2];
     s16 posX, posY;
@@ -365,6 +674,7 @@ void EntityAlucardWaterEffect(Entity* self) {
     self->ext.aluwater.unk8C = sp10[0];
     self->ext.aluwater.unk8E = sp10[1];
 }
+#endif
 
 void EntitySplashWater(Entity* self) {
     s32 primIndex;
@@ -503,7 +813,11 @@ void EntitySplashWater(Entity* self) {
 
         g_api.PlaySfxVolPan(g_WaterSounds[0], 0x7F, aspect);
 
+#if defined(STAGE_IS_RNO3)
+        self->velocityY = -g_SplashYMovement[params * 2];
+#else
         self->velocityY = g_SplashYMovement[params * 2];
+#endif
         self->ext.waterEffects.accelY = g_SplashYMovement[params * 2 + 1];
 
         newEntity = AllocEntity(&g_Entities[224], &g_Entities[256]);
@@ -515,10 +829,17 @@ void EntitySplashWater(Entity* self) {
 
     case 1:
         MoveEntity(self);
+#if defined(STAGE_IS_RNO3)
+        self->velocityY -= self->ext.waterEffects.accelY;
+        if (self->velocityY < -FIX(2.5)) {
+            self->step++;
+        }
+#else
         self->velocityY += self->ext.waterEffects.accelY;
         if (self->velocityY > FIX(2.5)) {
             self->step++;
         }
+#endif
         break;
 
     case 2:
@@ -625,6 +946,17 @@ void EntitySurfacingWater(Entity* self) {
             }
             prim = prim->next;
         }
+#if defined(STAGE_IS_RNO3)
+        self->ext.waterEffects.topY.i.hi =
+            -(g_SurfacingYTbl[self->params & 0xFF] + 12 + (rand() & 1));
+        self->velocityX = -self->ext.waterEffects.unk8A * 16;
+        if (params) {
+            self->velocityY = self->velocityX / temp_s3;
+            if (self->velocityY > 0) {
+                self->velocityY = -self->velocityY;
+            }
+        }
+#else
         self->ext.waterEffects.topY.i.hi =
             g_SurfacingYTbl[self->params & 0xFF] + 12 + (rand() & 1);
         self->velocityX = self->ext.waterEffects.unk8A * 16;
@@ -634,16 +966,39 @@ void EntitySurfacingWater(Entity* self) {
                 self->velocityY = -self->velocityY;
             }
         }
+#endif
         break;
 
     case 1:
+#if defined(STAGE_IS_RNO3)
+        self->ext.waterEffects.topY.val += FIX(0.25);
+#else
         self->ext.waterEffects.topY.val -= FIX(0.25);
+#endif
         break;
     }
 
     MoveEntity(self);
     i = self->velocityX;
     if (i != 0) {
+#if defined(STAGE_IS_RNO3)
+        x = (u16)g_Tilemap.width - g_WaterXTbl[self->ext.waterEffects.unk88] -
+            g_WaterXTbl[self->ext.waterEffects.unk88 + 1];
+        if (i < 0) {
+            x += 6 - tilemap->scrollX.i.hi;
+            if (self->posX.i.hi < x) {
+                DestroyEntity(self);
+                return;
+            }
+        } else {
+            y = tilemap->scrollX.i.hi + 6;
+            x += g_WaterXTbl[self->ext.waterEffects.unk88 + 1] - y;
+            if (self->posX.i.hi >= x) {
+                DestroyEntity(self);
+                return;
+            }
+        }
+#else
         x = g_WaterXTbl[self->ext.waterEffects.unk88];
         if (i < 0) {
             x += 6 - tilemap->scrollX.i.hi;
@@ -659,6 +1014,7 @@ void EntitySurfacingWater(Entity* self) {
                 return;
             }
         }
+#endif
     }
 
     x = self->posX.i.hi;
@@ -737,6 +1093,10 @@ void EntitySideWaterSplash(Entity* self) {
         velX += rsin(angle) * *speedPtr;
         velY += rcos(angle) * *speedPtr;
         velX += (s16)(params & 0xFF00) * 4;
+#if defined(STAGE_IS_RNO3)
+        velX = -velX;
+        velY = -velY;
+#endif
         self->velocityX = velX;
         self->velocityY = velY;
         self->ext.waterEffects.accelY = FIX(22.0 / 128);
@@ -744,7 +1104,11 @@ void EntitySideWaterSplash(Entity* self) {
 
     case 1:
         MoveEntity(self);
+#if defined(STAGE_IS_RNO3)
+        self->velocityY -= self->ext.waterEffects.accelY;
+#else
         self->velocityY += self->ext.waterEffects.accelY;
+#endif
         break;
     }
 
@@ -831,7 +1195,11 @@ void EntitySmallWaterDrop(Entity* self) {
 
     case 1:
         MoveEntity(self);
+#if defined(STAGE_IS_RNO3)
+        self->velocityY -= self->ext.waterEffects.accelY;
+#else
         self->velocityY += self->ext.waterEffects.accelY;
+#endif
         break;
     }
 
@@ -881,7 +1249,11 @@ void EntityWaterDrop(Entity* self) {
             }
 
             prim->posX.i.lo = prim->posY.i.lo = 0;
+#if defined(STAGE_IS_RNO3)
+            prim->velocityY.val = self->velocityY - (rand() & PSP_RANDMASK) * 8;
+#else
             prim->velocityY.val = (rand() & PSP_RANDMASK) * 8 + self->velocityY;
+#endif
             prim->posY.i.hi = y + (rand() & 15);
             prim->posX.i.hi = x + (rand() & 31) - 16;
             prim->delay = (rand() & 15) + 32;
@@ -916,6 +1288,15 @@ void EntityWaterDrop(Entity* self) {
                 prim->drawMode |= DRAW_HIDE;
             }
             prim->posY.val += prim->velocityY.val;
+#if defined(STAGE_IS_RNO3)
+            if (prim->velocityY.val < -FIX(0.5)) {
+                prim->r0 -= 4;
+                prim->g0 -= 4;
+                prim->b0 -= 4;
+            } else {
+                prim->velocityY.val -= FIX(28.0 / 128);
+            }
+#else
             if (prim->velocityY.val > FIX(0.5)) {
                 prim->r0 -= 4;
                 prim->g0 -= 4;
@@ -923,6 +1304,7 @@ void EntityWaterDrop(Entity* self) {
             } else {
                 prim->velocityY.val += FIX(28.0 / 128);
             }
+#endif
             prim->x0 = prim->posX.i.hi;
             prim->y0 = prim->posY.i.hi;
             prim = prim->next;

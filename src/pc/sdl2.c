@@ -24,8 +24,10 @@ DebugSdl g_DebugSdl = DEBUG_SDL_NONE;
 SDL_Texture* g_VramTex = NULL;
 int g_LastVramTexTpage = -1;
 int g_LastVramTexClut = -1;
-int g_WndWidth = -1;
-int g_WndHeight = -1;
+// current game display size, i.e. the renderer's logical resolution; the
+// window itself can be any size, SDL letterboxes the image into it
+int g_DispWidth = -1;
+int g_DispHeight = -1;
 
 uint32_t GPU_Update(const int32_t sys_timestamp);
 
@@ -42,10 +44,20 @@ bool InitPlatform() {
         return false;
     }
 
-    g_Window = SDL_CreateWindow(
-        "SOTN", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-        DISP_WIDTH * g_GameParams.scale, DISP_HEIGHT * g_GameParams.scale,
-        SDL_WINDOW_SHOWN);
+    int winW = g_GameParams.windowW;
+    int winH = g_GameParams.windowH;
+    if (winW <= 0 || winH <= 0) {
+        winW = DISP_WIDTH * g_GameParams.scale;
+        winH = DISP_HEIGHT * g_GameParams.scale;
+    }
+    Uint32 wndFlags =
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
+    if (g_GameParams.fullscreen) {
+        wndFlags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    }
+    g_Window =
+        SDL_CreateWindow("SOTN", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                         winW, winH, wndFlags);
     if (!g_Window) {
         ERRORF("SDL_CreateWindow: %s", SDL_GetError());
         return false;
@@ -58,6 +70,7 @@ bool InitPlatform() {
         return false;
     }
     SDL_SetRenderDrawBlendMode(g_Renderer, SDL_BLENDMODE_BLEND);
+    SDL_RenderSetLogicalSize(g_Renderer, DISP_WIDTH, DISP_HEIGHT);
 
     g_VramTex = SDL_CreateTexture(g_Renderer, SDL_PIXELFORMAT_ABGR1555,
                                   SDL_TEXTUREACCESS_STREAMING, 256, 256);
@@ -89,6 +102,14 @@ void ResetPlatform(void) {
     }
 
     SDL_Quit();
+}
+
+void ToggleFullscreen(void) {
+    if (SDL_GetWindowFlags(g_Window) & SDL_WINDOW_FULLSCREEN_DESKTOP) {
+        SDL_SetWindowFullscreen(g_Window, 0);
+    } else {
+        SDL_SetWindowFullscreen(g_Window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    }
 }
 
 int MyResetGraph(int arg0) { return 0; }

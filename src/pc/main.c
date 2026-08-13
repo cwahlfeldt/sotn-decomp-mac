@@ -59,6 +59,8 @@ static void printHelp(void) {
     printf("  --stage <stage>    stage name or ID (e.g., nz0)\n");
     printf("  --player <name>    player name or ID (e.g. ric)\n");
     printf("  --scale <number>   game resolution integer scale (default 2)\n");
+    printf("  --window <WxH>     initial window size (e.g. 1920x1080)\n");
+    printf("  --fullscreen       start in fullscreen (F11 toggles)\n");
     printf("  --test <mode>      run automated tests\n");
     printf("         sndlib      test sound library\n");
     printf("  --help             show this help message\n");
@@ -82,6 +84,9 @@ static bool parseArgs(
     outParams->stage = -1;
     outParams->player = -1;
     outParams->scale = 2;
+    outParams->windowW = 0;
+    outParams->windowH = 0;
+    outParams->fullscreen = 0;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--help") == 0) {
@@ -110,6 +115,16 @@ static bool parseArgs(
                 printf("invalid resolution scale %s\n", argv[i]);
                 return false;
             }
+        } else if (strcmp(argv[i], "--window") == 0 && i + 1 < argc) {
+            if (sscanf(argv[++i], "%dx%d", &outParams->windowW,
+                       &outParams->windowH) != 2 ||
+                outParams->windowW < 1 || outParams->windowH < 1) {
+                printf("invalid window size '%s', expected e.g. 1920x1080\n",
+                       argv[i]);
+                return false;
+            }
+        } else if (strcmp(argv[i], "--fullscreen") == 0) {
+            outParams->fullscreen = 1;
         } else if (strcmp(argv[i], "--test") == 0 && i + 1 < argc) {
             outParams->testMode = PARSE_PARAM(argv[++i], allowed_tests) + 1;
             if (outParams->testMode < 0) {

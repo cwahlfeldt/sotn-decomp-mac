@@ -16,7 +16,8 @@
 #include <stdio.h>
 #include <log.h>
 
-#define DISP_WIDTH 256
+// native size of the PSX display area; the window scales this freely
+#define DISP_WIDTH 400
 #define DISP_HEIGHT 256
 
 #define VRAM_W 1024
@@ -33,6 +34,9 @@ struct InitGameParams {
     int stage;
     int player;
     int scale;
+    int windowW; // initial window size; 0 = DISP_WIDTH/HEIGHT * scale
+    int windowH;
+    int fullscreen;
 };
 
 struct FileOpenRead {

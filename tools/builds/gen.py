@@ -97,6 +97,7 @@ class CompilerParams:
     mwcc_opt: str = "-Op"
     aspsx_ver: str = "2.34"
     encoding: str = "sjis"
+    asm_filter: str = "cat"
 
 
 def get_compiler_params(source_file_path: str) -> CompilerParams:
@@ -145,6 +146,14 @@ def get_compiler_params(source_file_path: str) -> CompilerParams:
                 raise ValueError(f"PSYQ version '{value}' is not recognized")
         elif key == "O":
             c.cc_opt = f"-O{value}"
+        elif key == "JTBL_ALIGN":
+            # The real ASPSX only 4-aligns .rdata jump tables; GNU as honors
+            # the .align 3 GCC emits, padding them to 8. Files whose original
+            # jump tables sit at 4-mod-8 offsets need this downgrade.
+            if value == "4":
+                c.asm_filter = "sed 's/^\\t\\.align\\t3/\\t.align\\t2/'"
+            else:
+                raise ValueError(f"JTBL_ALIGN value '{value}' is not recognized")
         elif key == "PSPO":
             c.mwcc_opt = f"-O{value}"
         elif key == "ENCODING":
@@ -173,6 +182,7 @@ def add_c_psx(
             "cpp_flags": cpp_flags,
             "cc_flags": c_params.cc_opt,
             "aspsx_ver": c_params.aspsx_ver,
+            "asm_filter": c_params.asm_filter,
         },
     )
 
@@ -775,6 +785,7 @@ with open(build_ninja, "w") as f:
         " | tools/sotn_str/target/release/sotn_str process"
         " | iconv --from-code=UTF-8 --to-code=Shift-JIS"
         " | bin/cc1-psx-26 -G0 -w -funsigned-char -fpeephole -ffunction-cse -fpcc-struct-return -fcommon -fverbose-asm -msoft-float -g -quiet -mcpu=3000 -fgnu-linker -mgas -gcoff $cc_flags"
+        " | $asm_filter"
         " | python3 tools/maspsx/maspsx.py --expand-div --aspsx-version=$aspsx_ver"
         " | mipsel-linux-gnu-as -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G0 -o $out"
     )

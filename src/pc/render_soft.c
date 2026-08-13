@@ -15,8 +15,9 @@
 
 extern SDL_Renderer* g_Renderer;
 extern bool g_IsQuitRequested;
-extern int g_WndWidth;
-extern int g_WndHeight;
+extern int g_DispWidth;
+extern int g_DispHeight;
+void ToggleFullscreen(void);
 extern SDL_Window* g_Window;
 
 u8* GetPix();
@@ -54,9 +55,11 @@ void CopyVram(void) {
 
     SDL_UnlockTexture(t);
 
-    // x, y, w, h
-    SDL_Rect rsrc = {0, 0, 1024, 512};
-    SDL_Rect rdst = {0, 0, 1024, 512};
+    // only the display area; SDL scales it into the window via logical size
+    int w = g_DispWidth > 0 ? g_DispWidth : DISP_WIDTH;
+    int h = g_DispHeight > 0 ? g_DispHeight : DISP_HEIGHT;
+    SDL_Rect rsrc = {0, 0, w, h};
+    SDL_Rect rdst = {0, 0, w, h};
     SDL_RenderCopy(g_Renderer, t, &rsrc, &rdst);
 
     SDL_DestroyTexture(t);
@@ -67,7 +70,6 @@ int SoftDrawSync(int mode) {
     CopyVram();
 
     SDL_RenderPresent(g_Renderer);
-    SDL_RenderSetScale(g_Renderer, g_GameParams.scale, g_GameParams.scale);
 
     // SDL event handling
     SDL_Event event;
@@ -75,6 +77,11 @@ int SoftDrawSync(int mode) {
         switch (event.type) {
         case SDL_QUIT:
             g_IsQuitRequested = 1;
+            break;
+        case SDL_KEYDOWN:
+            if (event.key.keysym.sym == SDLK_F11) {
+                ToggleFullscreen();
+            }
             break;
         }
     }
@@ -85,9 +92,7 @@ int SoftDrawSync(int mode) {
 }
 
 DISPENV* SoftPutDispEnv(DISPENV* env) {
-    int w = env->disp.w * g_GameParams.scale;
-    int h = env->disp.h * g_GameParams.scale;
-    if (g_WndWidth == w && g_WndHeight == h) {
+    if (g_DispWidth == env->disp.w && g_DispHeight == env->disp.h) {
         return env;
     }
 
@@ -128,9 +133,9 @@ DISPENV* SoftPutDispEnv(DISPENV* env) {
     GPU_Write(0, 4, var_s1);
     GPU_Update(128);
 
-    g_WndWidth = w;
-    g_WndHeight = h;
-    SDL_SetWindowSize(g_Window, w, h);
+    g_DispWidth = env->disp.w;
+    g_DispHeight = env->disp.h;
+    SDL_RenderSetLogicalSize(g_Renderer, g_DispWidth, g_DispHeight);
     return env;
 }
 

@@ -60,7 +60,8 @@ segments:
       - [0xFB4, .data, e_cavern_door]
       - [0xFC0, .data, e_jewel_sword_puzzle]
       - [0x10C0, .data, e_transparent_water]
-      - [0x10F8, data]
+      - [0x10F8, .data, d_water_data]
+      - [0x112C, data]
       - [0x114C, .data, st_update]
       - [0x1178, .data, collision]
       - [0x1538, .data, e_red_door]
@@ -71,6 +72,8 @@ segments:
       - [0x1BDC, .data, e_room_fg]
       - [0x1C68, .data, e_fire_warg]
       - [0x2548, data]
+      - [0x2A34, .data, unk_46940]
+      - [0x2AF0, data] # func_us_801C8B8C tables
       - [0x2C24, .data, gen/e_layout] # layout entries data
       - [0x39BC, data]
       - [0x42A4, .data, stage_data]
